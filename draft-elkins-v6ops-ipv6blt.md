@@ -19,11 +19,10 @@
 # Change the file extension to match the format (.xml for XML, etc...)
 #
 ###
-title: "TODO - Your title"
-abbrev: "TODO - Abbreviation"
+title: "IPv6 Over Bluetooth"
 category: info
 
-docname: draft-todo-yourname-protocol-latest
+docname: draft-elkins-v6ops-ipv6blt
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
