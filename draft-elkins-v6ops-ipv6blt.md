@@ -94,7 +94,7 @@ Additionally, there are four DLL libraries in this project to support functional
 The following diagram illustrates the system architecture for this solution:
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/d250a65d-272f-4127-a1e5-f9bf4523b23e)
-                                    Figure 5: IPv6 over Bluetooth Architecture
+Figure 5: IPv6 over Bluetooth Architecture
 
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
 
