@@ -114,7 +114,7 @@ An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packe
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/85508361-2219-4a9a-8217-e66cd228101a)
 
-                                       Figure 2: Packet Layout
+                                                  Figure 2: Packet Layout
 
 # Where is header compression done?
 Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is closed source. Therefore, the concept of an adaptation layer is spread across the driver and this module.
