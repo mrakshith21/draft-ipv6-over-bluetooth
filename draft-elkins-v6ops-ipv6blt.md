@@ -83,8 +83,8 @@ Since BLE communication aims to conserve power, IPv6 over BLE involves header co
 
 ## Architecture
 There are two primary components to this project:
-- WFP callout driver (IPv6ToBle.sys)
-- Packet processing app
+- WFP callout driver (IPv6ToBle.sys).
+- Packet processing app.
 Additionally, there are four DLL libraries in this project to support functionality in the packet processing app:
 - A custom driver interoperability library.
 - A Bluetooth GATT library, also including device enumeration and discovery.
