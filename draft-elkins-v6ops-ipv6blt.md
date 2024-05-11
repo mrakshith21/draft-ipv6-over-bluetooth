@@ -94,16 +94,17 @@ Additionally, there are four DLL libraries in this project to support functional
 The following diagram illustrates the system architecture for this solution:
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/d250a65d-272f-4127-a1e5-f9bf4523b23e)
+                                    Figure 5: IPv6 over Bluetooth Architecture
 
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
 
-## Driver
+### Driver
 The driver acts as a bridge between the Windows TCP/IP network stack and the Bluetooth stack. It filters outgoing IPv6 packets for the nodes running in the BLE network. These packets are then processed by the packet processing app. The driver can also filter incoming IPv6 packets and inject them into the TCP/IP stack.
 
-## Packet Processing App
+### Packet Processing App
 This is a core component that is a part of the bridge along with the driver. Firstly, it obtains a link-local address based on the Bluetooth address. It also scans for nearby devices and identifies compatible ones. Then, it subscribes and receives IPv6 packets from the driver. After compressing the header, it transfers the packet over to nearby compatible devices. The packet processing app on the other device receives the packet. If it is for that device, it sends it to the driver for inbound injection into the TCP/IP network stack, otherwise, sends the packet to each nearby device.
 
-## GATT server
+### GATT server
 The GATT server is started by the packet processing app. It contains the Internet Protocol Support Service (ISPS), which indicates that the server supports IPv6 over Bluetooth. The server runs on all nodes, and nodes can act as both client and server depending on whether they receive or send the packet.
 
 # Bluetooth packet layout
