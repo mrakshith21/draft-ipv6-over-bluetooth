@@ -113,6 +113,7 @@ The GATT server is started by the packet processing app. It contains the Interne
 An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. It consists of the following:
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/85508361-2219-4a9a-8217-e66cd228101a)
+
                                        Figure 2: Packet Layout
 
 # Where is header compression done?
