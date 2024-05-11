@@ -97,6 +97,18 @@ The following diagram illustrates the system architecture for this solution:
 
                                        Figure 1: IPv6 over Bluetooth Architecture
 
+- WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge between the TCP/IP stack and the Bluetooth stack, filtering traffic destined for BLE devices and managing outbound traffic.
+
+- Packet Processing App: This user-mode component completes the bridge between TCP/IP and Bluetooth LE stacks. It handles tasks like obtaining IPv6 addresses, scanning for compatible BLE devices, compressing IPv6 headers, and transferring packets over BLE.
+
+- Driver Interop Library: Used by the packet processing app to communicate with the driver, supporting both synchronous and asynchronous commands.
+
+- Bluetooth GATT Library: Encompasses GATT server and client functionality, advertising services and facilitating packet transfer between devices.
+
+- Bluetooth Advertisement Library: Intended for advertising supported BLE devices but not utilized in the final product due to conflicts with GATT server advertisements.
+
+- 6LoWPAN Library: Implements header compression and stateless auto-configuration, crucial for BLE communication.
+
 ## IPv6 over Bluetooth Components
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
 
