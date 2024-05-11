@@ -97,7 +97,8 @@ The following diagram illustrates the system architecture for this solution:
 
                                        Figure 1: IPv6 over Bluetooth Architecture
 
-The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
+## IPv6 over Bluetooth Components
+Te following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
 
 ### Driver
 The driver acts as a bridge between the Windows TCP/IP network stack and the Bluetooth stack. It filters outgoing IPv6 packets for the nodes running in the BLE network. These packets are then processed by the packet processing app. The driver can also filter incoming IPv6 packets and inject them into the TCP/IP stack.
