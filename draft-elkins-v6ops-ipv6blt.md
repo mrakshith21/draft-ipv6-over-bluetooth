@@ -81,6 +81,19 @@ Since BLE communication aims to conserve power, IPv6 over BLE involves header co
 
 # Implementation of IPv6 over Bluetooth on Windows
 
+## Architecture
+There are two primary components to this project:
+- WFP callout driver (IPv6ToBle.sys)
+- Packet processing app
+Additionally, there are four DLL libraries in this project to support functionality in the packet processing app:
+- A custom driver interoperability library.
+- A Bluetooth GATT library, also including device enumeration and discovery.
+- A 6LoWPAN library.
+
+The following diagram illustrates the system architecture for this solution:
+
+![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/d250a65d-272f-4127-a1e5-f9bf4523b23e)
+
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
 
 ## Driver
