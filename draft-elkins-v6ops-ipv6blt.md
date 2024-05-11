@@ -112,25 +112,7 @@ The GATT server is started by the packet processing app. It contains the Interne
 
 An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. It consists of the following:
 
-<!-- | Bluetooth L2CAP Protocol |
-| Bluetooth ATT Protocol |
-|     Opcode |
-|     Handle |
-|     Value  |
-|         IPv6 packet| -->
-
-
-
-+------------------------------+<br />
-| -- Bluetooth L2CAP Protocol &nbsp; &nbsp; &nbsp;|<br />
-| -- Bluetooth ATT Protocol &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|<br />
-| ---- Opcode &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|<br />
-| ---- Handle &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; |<br />
-| ---- Value &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp;|<br />
-| -------- IPv6 Packet  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;|<br />
-+------------------------------+<br />
-
-
+![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/85508361-2219-4a9a-8217-e66cd228101a)
 
 # Where is header compression done?
 Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is closed source. Therefore, the concept of an adaptation layer is spread across the driver and this module.
