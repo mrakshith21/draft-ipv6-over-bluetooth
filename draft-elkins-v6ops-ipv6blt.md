@@ -85,7 +85,7 @@ It is s a pre-defined collection of services that has been  compiled by either t
 - These are methods/calls that invoke a particular action on a characteristic.
 - Example: Sync data control point which triggers a fitness tracker to synchronize data with a companion app.
 
-  ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/a845ed40-9d0a-4b24-898a-925ec112866f)
+           ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/a845ed40-9d0a-4b24-898a-925ec112866f)
 
                                            Figure 1: Generic Attribute Profile
 
