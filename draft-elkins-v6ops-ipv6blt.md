@@ -63,6 +63,33 @@ Bluetooth devices can only connect to the Internet using the smartphone or a cen
 
 RFC 7668 specifies the standards and guidelines for transmitting IPv6 packets over Bluetooth Low Energy (BLE) networks.
 
+### GATT
+GATT (Generic ATTribute Profile) defines the way that two Bluetooth Low Energy devices messages transfer between each other. It uses a generic data protocol called the Attribute Protocol (ATT), which is used to store services, and characteristics in a simple lookup table with 16-bit IDs (UUIDs). GATT operates when a dedicated connection is established between two devices. BLE peripheral can only be connected to one central device (a mobile phone, etc.) at a time. As soon as a peripheral connects to a central device, it will stop advertising itself and other devices will no longer be able to see it or connect to it until the existing connection is broken.
+
+GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics and Control Points.
+
+1. Profile
+It is s a pre-defined collection of services that has been  compiled by either the Bluetooth SIG or by the peripheral designers.
+
+2. Services
+- Services are used to break data up into logical entities, and contain specific chunks of data called characteristics. 
+- A service can have one or more characteristics, and each service distinguishes itself from other services by means of a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services).
+- Example: A fitness service that represents a list of characteristics for fitness tracking.
+
+3. Characteristics
+- The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point.
+- Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.
+- Example: Heart Rate Characteristic (standard UUID 2A37) which allows reading the current heart rate.
+
+4. Control Points
+- These are methods/calls that invoke a particular action on a characteristic.
+- Example: Sync data control point which triggers a fitness tracker to synchronize data with a companion app.
+
+****![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/a845ed40-9d0a-4b24-898a-925ec112866f)
+
+                                           Figure 1: Generic Attribute Profile
+
+
 ### Network Topology
 IPv6 over BLE networks form a topology with nodes of two roles, central and peripheral. A central node can manage connections with a number of peripheral devices, while a peripheral is usually connected only to a central node. A central node is assumed to be less resource-constrained and acts as a border router. In a typical scenario, the BLE network is connected to the Internet through the border router, which can forward packets between the nodes and to and from the Internet.
 The peripheral nodes are connected to each other by IPv6 over Bluetooth. The central node is connected to every peripheral node by IPv6 over Bluetooth.
@@ -95,7 +122,7 @@ The following diagram illustrates the system architecture for this solution:
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/d250a65d-272f-4127-a1e5-f9bf4523b23e)
 
-                                       Figure 1: IPv6 over Bluetooth Architecture
+                                       Figure 2: IPv6 over Bluetooth Architecture
 
 The componets described in the diagram are briefly described below:
 - WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge between the TCP/IP stack and the Bluetooth stack, filtering traffic destined for BLE devices and managing outbound traffic.
@@ -128,7 +155,7 @@ An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packe
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/85508361-2219-4a9a-8217-e66cd228101a)
 
-                                                  Figure 2: Packet Layout
+                                                  Figure 3: Packet Layout
 
 # Where is header compression done?
 Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is closed source. Therefore, the concept of an adaptation layer is spread across the driver and this module.
