@@ -97,6 +97,7 @@ The following diagram illustrates the system architecture for this solution:
 
                                        Figure 1: IPv6 over Bluetooth Architecture
 
+The componets described in the diagram are briefly described below:
 - WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge between the TCP/IP stack and the Bluetooth stack, filtering traffic destined for BLE devices and managing outbound traffic.
 
 - Packet Processing App: This user-mode component completes the bridge between TCP/IP and Bluetooth LE stacks. It handles tasks like obtaining IPv6 addresses, scanning for compatible BLE devices, compressing IPv6 headers, and transferring packets over BLE.
