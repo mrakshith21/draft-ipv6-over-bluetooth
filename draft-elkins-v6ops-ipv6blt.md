@@ -42,7 +42,7 @@ author:
  -
     fullname: "Shrinidhi Ballal Nidamboor"
     organization: NITK Surathkal
-    email: "rakshith21mohan@gmail.com"
+    email: "ballalshrinidhi@gmail.com"
 
 
 normative:
