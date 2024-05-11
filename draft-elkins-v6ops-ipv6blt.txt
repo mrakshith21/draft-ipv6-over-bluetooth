@@ -5,11 +5,11 @@
 IPv6 Operations                                                N. Elkins
 Internet-Draft                                     Inside Products, Inc.
 Intended status: Informational                           M. P. Tahiliani
-Expires: 9 November 2024                                        R. Mohan
+Expires: 12 November 2024                                       R. Mohan
                                                               T. Sankpal
                                                          S. B. Nidamboor
                                                           NITK Surathkal
-                                                              8 May 2024
+                                                             11 May 2024
 
 
                           IPv6 Over Bluetooth
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 November 2024.
+   This Internet-Draft will expire on 12 November 2024.
 
 Copyright Notice
 
