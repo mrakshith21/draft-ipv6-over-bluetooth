@@ -57,7 +57,6 @@ RFC 7668 and RFC 9159 describe IPv6 over Bluetooth Low Energy networks. However,
 
 # Introduction
 
-
 Bluetooth devices can only connect to the Internet using the smartphone or a central server as a gateway. However, it is also possible for such devices to operate autonomously using IPv6 over Bluetooth. It is an addition of an IPv6 layer to the Bluetooth stack. The reason IPv6 is chosen, not IPv4, is because it provides significantly more individual IP addresses for the anticipated billions of bluetooth devices that will make up the Internet of Things in the future.
 
 ## Background
