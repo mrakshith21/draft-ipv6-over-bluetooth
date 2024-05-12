@@ -136,9 +136,12 @@ The GATT server is started by the packet processing app. It contains the Interne
 
 An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. It consists of the following:
 
-![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/85508361-2219-4a9a-8217-e66cd228101a)
+![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/60eda1f9-8be4-4a12-b6e5-98e6bf440a6e)
 
                                                   Figure 3: Packet Layout
+
+A custom lua dissector to dissect the IPv6 packet within the Bluetooth ATT Value field was designed. In the application, the IPv6 packet is written to a GATT characteristic with handle 0x0018. So, the custom dissector is invoked when the ATT handle’s value is 0x0018. The buffer is then passed to the in builtipv6 dissector which dissects the data in the ‘Value’ field.
+
 
 # Where is header compression done?
 Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is closed source. Therefore, the concept of an adaptation layer is spread across the driver and this module.
