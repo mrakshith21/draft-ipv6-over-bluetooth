@@ -3,9 +3,9 @@
 This is the working area for the individual Internet-Draft, "IPv6 Over Bluetooth".
 
 * [Editor's Copy](https://mrakshith21.github.io/draft-ipv6-over-bluetooth/#go.draft-elkins-v6ops-ipv6blt.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-elkins-v6ops-ipv6blt)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-elkins-v6ops-ipv6blt)
-* [Compare Editor's Copy to Individual Draft](https://mrakshith21.github.io/draft-ipv6-over-bluetooth/#go.draft-elkins-v6ops-ipv6blt.diff)
+<!-- * [Datatracker Page](https://datatracker.ietf.org/doc/draft-elkins-v6ops-ipv6blt) -->
+<!-- * [Individual Draft](https://datatracker.ietf.org/doc/html/draft-elkins-v6ops-ipv6blt) -->
+<!-- * [Compare Editor's Copy to Individual Draft](https://mrakshith21.github.io/draft-ipv6-over-bluetooth/#go.draft-elkins-v6ops-ipv6blt.diff) -->
 
 
 ## Contributing
