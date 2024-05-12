@@ -66,24 +66,7 @@ RFC 7668 specifies the standards and guidelines for transmitting IPv6 packets ov
 ### GATT
 GATT (Generic ATTribute Profile) defines the way that two Bluetooth Low Energy devices messages transfer between each other. It uses a generic data protocol called the Attribute Protocol (ATT), which is used to store services, and characteristics in a simple lookup table with 16-bit IDs (UUIDs). GATT operates when a dedicated connection is established between two devices. BLE peripheral can only be connected to one central device (a mobile phone, etc.) at a time. As soon as a peripheral connects to a central device, it will stop advertising itself and other devices will no longer be able to see it or connect to it until the existing connection is broken.
 
-GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics and Control Points.
-
-1. Profile
-It is s a pre-defined collection of services that has been  compiled by either the Bluetooth SIG or by the peripheral designers.
-
-2. Services
-- Services are used to break data up into logical entities, and contain specific chunks of data called characteristics. 
-- A service can have one or more characteristics, and each service distinguishes itself from other services by means of a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services).
-- Example: A fitness service that represents a list of characteristics for fitness tracking.
-
-3. Characteristics
-- The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point.
-- Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.
-- Example: Heart Rate Characteristic (standard UUID 2A37) which allows reading the current heart rate.
-
-4. Control Points
-- These are methods/calls that invoke a particular action on a characteristic.
-- Example: Sync data control point which triggers a fitness tracker to synchronize data with a companion app.
+GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics and Control Points. Services are used to break data up into logical entities, and contain specific chunks of data called characteristics. A service can have one or more characteristics, and each service distinguishes itself from other services by means of a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services). The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point. Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.
 
 ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/a845ed40-9d0a-4b24-898a-925ec112866f)
 
