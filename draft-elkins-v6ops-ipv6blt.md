@@ -105,7 +105,7 @@ The componets described in the diagram are briefly described below:
 ~~~
                     +--------------+
                     |    6LoWPAN   |
-			                 | library (DLL)|
+                    | library (DLL)|
                     +--------------+
 				                       |
                            |
