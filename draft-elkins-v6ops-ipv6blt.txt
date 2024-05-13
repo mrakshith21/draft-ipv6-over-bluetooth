@@ -12,16 +12,20 @@ Expires: 14 November 2024                                       R. Mohan
                                                              13 May 2024
 
 
-                          IPv6 Over Bluetooth
+            IPv6 Over Bluetooth for Non Low Powered Devices
                    draft-elkins-v6ops-ipv6blt-latest
 
 Abstract
 
-   RFC 7668 and RFC 9159 describe IPv6 over Bluetooth Low Energy
-   networks.  However, the potential of this technology has not been
-   fully explored.  This document describes IPv6 over Bluetooth on
-   Windows along with an implementation.  It also discusses some use
-   cases of this technology beyond BLE networks.
+   IPv6 over Bluetooth enables devices to communicate using the IPv6
+   protocol stack over Bluetooth wireless connections, expanding the
+   range of networking options available to devices with Bluetooth
+   capability.  RFC 7668 [RFC7668] and RFC 9159 [RFC9159] describe IPv6
+   over Bluetooth for Bluetooth Low Energy devices.  However, the
+   potential of this technology has not been fully explored.  This
+   document proposes the use of this technology for non low powered
+   devices with an optional header compression and also discusses some
+   use cases.
 
 About This Document
 
@@ -86,37 +90,49 @@ Table of Contents
        2.2.1.  Driver
        2.2.2.  Packet Processing App
        2.2.3.  GATT server
-       2.2.4.  Bluetooth packet layout
-       2.2.5.  Header compression
-   3.  Comparison with RFC 7668
-   4.  Use cases
-     4.1.  Disaster recovery
-     4.2.  Near field chat
-     4.3.  Connecting IoT Gateways
-   5.  Conventions and Definitions
-   6.  Security Considerations
-   7.  IANA Considerations
-   8.  References
-     8.1.  Normative References
-     8.2.  Informative References
+       2.2.4.  DriverTest
+     2.3.  Bluetooth packet layout
+     2.4.  Header compression
+     2.5.  Comparison with RFC 7668
+   3.  Use cases
+     3.1.  Disaster recovery
+     3.2.  Near field chat
+     3.3.  IoT Gateways
+   4.  Conventions and Definitions
+   5.  Security Considerations
+   6.  IANA Considerations
+   7.  References
+     7.1.  Normative References
+     7.2.  Informative References
    Acknowledgments
    Authors' Addresses
 
 1.  Introduction
 
    Bluetooth is a low-power wireless technology designed for short-range
-   control and monitoring applications.  The IETF has produced
-   specifications regarding IPv6 over Bluetooth Low Energy devices to
-   improve the Internet of Things arena, such as the Internet Protocol
-   Support Profile (IPSP).  RFC 7668 [RFC7668] was developed for star
-   topology while RFC 9159 [RFC9159] specifies mechanisms to enable IPv6
-   mesh over Bluetooth LE links.  However, the potential of this
-   technology for non-low powered devices has been unexplored.  This
-   document introduces IPv6 over Bluetooth with uncompressed (optional)
-   frames as a potential medium for non low powered devices (Windows,
-   Linux, Android OS).  It includes an implementation of IPv6 over
-   Bluetooth on Windows as an example and discusses use cases of this
-   technology.
+   control and monitoring applications.  To enhance IoT capabilities,
+   the IETF has developed specifications for IPv6 over BLE devices,
+   outlined in RFC 7668.  This RFC primarily addresses star topology,
+   while RFC 9159 extends IPv6 mesh networking capabilities over BLE
+   links.  Despite its focus on low-power devices, the implementation of
+   IPv6 over BLE can extend to non-low powered platforms like Windows,
+   Linux, Android OS, and iPhone running on personal computers and
+   mobile phones.
+
+   By adhering to the Internet Protocol Support Profile (IPSP), devices
+   such as personal computers and smartphones can harness IPv6 over BLE,
+   presenting an alternative connectivity solution.  This integration
+   amalgamates the benefits of IPv6's robust addressing and routing
+   capabilities with Bluetooth's simplicity.  Among these platforms,
+   Windows stands out due to its prevalence in personal computing.
+
+   Adding the IPv6 over Bluetooth functionality depends on the design
+   and flexibility of the operating system.  However, the adaptation
+   layer need not be built from scratch since the Bluetooth L2CAP
+   Protocol supports fragmentation and reassembly.  This document
+   presents an implementation of IPv6 over Bluetooth on Windows.  It
+   also discusses a few use cases of this technology in disaster
+   recovery, near field chat and IoT gateways.
 
 1.1.  Background
 
@@ -126,20 +142,17 @@ Table of Contents
    Low Energy devices messages transfer between each other.  It uses a
    generic data protocol called the Attribute Protocol (ATT), which is
    used to store services, and characteristics in a simple lookup table
-   with 16-bit IDs (UUIDs).  GATT operates when a dedicated connection
-   is established between two devices.
-
-   GATT transactions in BLE are based on high-level, nested objects
-   called Profiles, Services, Characteristics and Control Points.
-   Services are used to break data up into logical entities, and contain
-   specific chunks of data called characteristics.  A service can have
-   one or more characteristics, and each service distinguishes itself
-   from other services by means of a unique numeric ID called a UUID,
-   which can be either 16-bit (for officially adopted BLE Services) or
-   128-bit (for custom services).  The lowest level concept in GATT
-   transactions is the Characteristic, which encapsulates a single data
-   point.  Each characteristic distinguishes itself via a pre-defined
-   16-bit or 128-bit UUID.
+   with 16-bit IDs (UUIDs).  GATT transactions in BLE are based on high-
+   level, nested objects called Profiles, Services, Characteristics and
+   Control Points.  Services are used to break data up into logical
+   entities, and contain specific chunks of data called characteristics.
+   A service can have one or more characteristics, and each service
+   distinguishes itself from other services by means of a unique numeric
+   ID called a UUID, which can be either 16-bit (for officially adopted
+   BLE Services) or 128-bit (for custom services).  The lowest level
+   concept in GATT transactions is the Characteristic, which
+   encapsulates a single data point.  Each characteristic distinguishes
+   itself via a pre-defined 16-bit or 128-bit UUID.
 
 1.1.2.  IPv6 over Bluetooth networks and the IPSP
 
@@ -182,14 +195,14 @@ Table of Contents
 
 2.1.  Architecture
 
-   There are two primary components to this project:
+   There are two primary components to this implementation:
 
    *  WFP callout driver
 
    *  Packet processing app
 
    Additionally, there are four DLL libraries in this project to support
-   functionality in the packet processing app:
+   functionality in the Packet Processing App:
 
    *  A custom driver interoperability library.
 
@@ -198,10 +211,7 @@ Table of Contents
 
    *  A 6LoWPAN library.
 
-   The following diagram illustrates the system architecture for this
-   solution:
-
-   The componets described in the diagram are briefly described below:
+   Figure 1 illustrates the system architecture for this solution.
 
                        +--------------+
                        |    6LoWPAN   |
@@ -212,7 +222,7 @@ Table of Contents
                               |
    +----------------+  +--------------+  +----------------+
    | Driver interop |  |    Packet    |  | Bluetooth GATT |
-   | library (DLL)  |--|  processing  |--| library (DLL)  |
+   | library        |--|  processing  |--| library        |
    +----------------+  |    UWP app   |  +----------------+
              |         +--------------+          |
              +------------------+                |
@@ -225,19 +235,32 @@ Table of Contents
     +--------------+     +---------------+    +--------------+
     |     IPv6     |     |  WFP callout  |    |   Bluetooth  |
     +--------------+     |    driver     |    |     L2CAP    |
-    |Wi-Fi/Ethernet|     |(IPv6ToBle.sys)|    +--------------+
-    +--------------+     +---------------+
+    |Wi-Fi/Ethernet|     +---------------+    +--------------+
+    +--------------+
 
                            Figure 1: Architecture
 
-   The driver filters outgoing IPv6 packets and can also filter incoming
-   ones, forwarding them appropriately.  The Packet Processing App,
-   working with the driver, obtains Bluetooth-based link-local
-   addresses, scans for nearby devices, and compresses IPv6 packet
-   headers before transferring them to compatible devices.  A GATT
-   server, initiated by the Packet Processing App, supports IPv6 over
-   Bluetooth and operates on all nodes, allowing them to act as both
-   clients and servers as neede
+   The architecture consists of components operating in the user mode as
+   well as kernel mode.
+
+   The kernel mode involves low level operations such as filtering
+   packets through network interfaces and establishing Bluetooth links.
+   The driver is a core component that filters outgoing IPv6 packets and
+   can also filter incoming ones, forwarding them appropriately.  It
+   also can push a given IPv6 packet embedded in a Bluetooth packet,
+   into the network stack, for an appropriate application to consume.
+
+   Components operating in the user mode are as follows.  The Packet
+   Processing App, working with the driver, is an important component
+   that bridges the packet's transition from the IP layer to Bluetooth
+   and vice versa.  It obtains Bluetooth-based link-local addresses,
+   scans for nearby Bluetooth devices, compresses IPv6 packet headers
+   and initiates transfer of Bluetooth packets or receipt.  It makes use
+   of libraries - a 6LowPAN library for address and header compression,
+   a driver interop library to communicate with the driver.  The GATT
+   server, is also initiated by the Packet Processing App, provides
+   IPSP, supporting IPv6 over Bluetooth and operates on all node and
+   allowing them to act as both clients and servers as needed.
 
 2.2.  Components
 
@@ -246,11 +269,15 @@ Table of Contents
 
 2.2.1.  Driver
 
-   The driver acts as a bridge between the Windows TCP/IP network stack
-   and the Bluetooth stack.  It filters outgoing IPv6 packets for the
-   nodes running in the BLE network.  These packets are then processed
-   by the packet processing app.  The driver can also filter incoming
-   IPv6 packets and inject them into the TCP/IP stack.
+   A WFP driver (Windows Filtering Platform) in Windows is a network
+   traffic processing component that provides a programmable interface
+   for filtering and examining network packets at various layers of the
+   TCP/IP protocol stack.  The driver acts as a bridge between the
+   Windows TCP/IP network stack and the Bluetooth stack.  It filters
+   outgoing IPv6 packets for the nodes running in the BLE network.
+   These packets are then processed by the packet processing app.  The
+   driver can also filter incoming IPv6 packets and inject them into the
+   TCP/IP stack.
 
 2.2.2.  Packet Processing App
 
@@ -267,21 +294,39 @@ Table of Contents
 2.2.3.  GATT server
 
    The GATT server is started by the packet processing app.  It contains
-   the Internet Protocol Support Service (ISPS), which indicates that
-   the server supports IPv6 over Bluetooth.  The server runs on all
-   nodes, and nodes can act as both client and server depending on
-   whether they receive or send the packet.
+   the Internet Protocol Support Service (IPSP), which indicates that
+   the server supports IPv6 over Bluetooth.  A node must write to the
+   characteristics of the IPSP to send a packet.
 
-2.2.4.  Bluetooth packet layout
+2.2.4.  DriverTest
+
+   This is a sample application that generates UDP packets with hard
+   coded data.  The purpose is for the driver to intercept these packets
+   and send them to the Packet Processing App for further action.
+
+2.3.  Bluetooth packet layout
 
    An IPv6 over BLE packet consists of an IPv6 packet embedded in a
-   Bluetooth packet.  It consists of the following:
+   Bluetooth packet.  A sample packet captured from the application is
+   shown in Figure 2
 
-   +--------------------------+
-   |                          |
-   |       Packet Layout      |
-   |                          |
-   +--------------------------+
+   +--------------------------------------------+
+   | Bluetooth L2CAP Protocol                   |
+   +--------------------------------------------+
+   | Bluetooth Attribute Protocol               |
+   +--------------------------------------------+
+   |  >  Opcode: Write Command (0x52)           |
+   +--------------------------------------------+
+   |  >  Handle: 0x0018                         |
+   +--------------------------------------------+
+   |  >  Value: IPv6 Packet                     |
+   +--------------------------------------------+
+   |          > IPv6 Header                     |
+   +--------------------------------------------+
+   |          > UDP Header                      |
+   +--------------------------------------------+
+   |          > Data: Hello World               |
+   +--------------------------------------------+
 
                           Figure 2: Packet layout
 
@@ -289,10 +334,10 @@ Table of Contents
    Bluetooth ATT Value field was designed.  In the application, the IPv6
    packet is written to a GATT characteristic with handle 0x0018.  So,
    the custom dissector is invoked when the ATT handle’s value is
-   0x0018.  The buffer is then passed to the in builtipv6 dissector
+   0x0018.  The buffer is then passed to the in built IPv6 dissector
    which dissects the data in the ‘Value’ field.
 
-2.2.5.  Header compression
+2.4.  Header compression
 
    Header compression is implemented as a library (named 6LoWPAN
    library), not as an operating system layer or module.  The
@@ -310,7 +355,7 @@ Table of Contents
    *  Similarly, when a packet is received over Bluetooth, the 6LoWPAN
       library is called to decompress the header.
 
-3.  Comparison with RFC 7668
+2.5.  Comparison with RFC 7668
 
    RFC 7668 [RFC7668] specifies RFC 6282 [RFC6282] for 6LoWPAN
 
@@ -320,25 +365,32 @@ Table of Contents
 
    *  Stateless auto configuration
 
-   The LoWPAN library of the project fulfills the first and third goals,
-   the second goal is automatically performed at the Bluetooth L2CAP
-   layer by Windows Bluetooth.  In particular, IPv6 header compression
-   is implemented as per RFC 6282 [RFC6282], and IPv6 address
-   compression is implemented as per RFC 7668 [RFC7668].
+   The 6LoWPAN library of the project fulfills the first and third
+   goals, the second goal is automatically performed at the Bluetooth
+   L2CAP layer by Windows Bluetooth.  In particular, IPv6 header
+   compression is implemented as per RFC 6282 [RFC6282], and IPv6
+   address compression is implemented as per RFC 7668 [RFC7668].
 
-4.  Use cases
+3.  Use cases
 
    IPv6 over Bluetooth can be used as an alternate technology for
    connecting devices, while using the vast features of IP as well as a
-   low powered interface using Bluetooth.
+   low powered interface using Bluetooth.  By developing implementations
+   of the IPv6 over Bluetooth stack on different operating systems such
+   as Windows, Linux, Android, iPhone and so on, we can facilitate the
+   use of this technology for non low powered devices as well and
+   explore its potential.  The following discusses some use cases.
 
-4.1.  Disaster recovery
+3.1.  Disaster recovery
 
-   In case of scenarios such as natural disasters, Internet failures or
-   shutdown, the area loses its ability to connect to the world through
-   IP.  This may be the result due to cable cuts or mobile tower
-   failures.  However, a local network can indeed be formed using IPv6
-   over Bluetooth.
+   In a disaster area where traditional means of communication like the
+   internet and cables are damaged or unavailable, establishing
+   connectivity between devices can be critical for coordination, rescue
+   efforts, and communication with survivors.  Devices can form adhoc
+   networks with each other using Ethernet cables or Bluetooth, but it
+   is insufficient to connect the entire network.  In such a situation,
+   IPv6 over Bluetooth can be a potential means of forming a network of
+   connected devices.
 
    We make the assumption that devices are Bluetooth enabled and are in
    Bluetooth range, so as to form a network of Bluetooth devices.  As
@@ -364,11 +416,45 @@ Table of Contents
       domain have unique addresses.  The network also needs to have an
       IPv6 prefix, which is to be determined.
 
-4.2.  Near field chat
+3.2.  Near field chat
 
-4.3.  Connecting IoT Gateways
+   TODO
 
-5.  Conventions and Definitions
+3.3.  IoT Gateways
+
+   Use cases in building management, healthcare, workplaces,
+   manufacturing, logistics and hospitality have introduced low-power
+   IoT devices into their environments.  These devices typically do not
+   support IP-based interfaces, hence there is a need for gateway
+   functions to allow these devices to communicate with the applications
+   that manage them.  IoT gateways provide various functionalities
+   depending on the kind of devices they are connected to and their
+   functionality.  For example, authentication and authorization of
+   application clients that will access device, interfaces that allow
+   for bi-directional communication to non-IP device and one or more
+   channels to process requests, responses, and asymmetric
+   communciations with the non-IP radio resources (access points) in the
+   system and so on.  IoT networks make use of such customized gateways
+   which communicate with each other and external networks to fulfill
+   the required functionality.
+
+   IPv6 over Bluetooth can be used in IoT networks wherein multiple IoT
+   gateways communicate with each other and a central router using IPv6
+   over Bluetooth Low Energy (BLE).  The topology consists of IoT
+   devices connected to local gateways, which then relay data to the
+   central router for external connectivity.
+
+                  Iot Gateway 1
+                        |
+                        |
+   IoT Gateway 2 --- Border Router ------------- Internet
+                        |
+                        |
+                  IoT Gateway 3
+
+     Figure 3: Multiple IoT gateways connected through a border router
+
+4.  Conventions and Definitions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
@@ -376,7 +462,7 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-6.  Security Considerations
+5.  Security Considerations
 
    The security considerations specified in RFC 7668 [RFC7668] apply for
    IPv6 over Bluetooth in non lower powered devices as well.  RFC 7416
@@ -385,13 +471,13 @@ Table of Contents
    Considering that devices are not resource constrained, the scale of
    threats can only increase.
 
-7.  IANA Considerations
+6.  IANA Considerations
 
    This document has no IANA actions.
 
-8.  References
+7.  References
 
-8.1.  Normative References
+7.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -402,7 +488,7 @@ Table of Contents
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
               May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
-8.2.  Informative References
+7.2.  Informative References
 
    [RFC6282]  Hui, J., Ed. and P. Thubert, "Compression Format for IPv6
               Datagrams over IEEE 802.15.4-Based Networks", RFC 6282,
