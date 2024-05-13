@@ -57,7 +57,7 @@ IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack
 
 # Introduction
 
-Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668. This RFC primarily addresses star topology, while RFC 9159 extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.
+Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668 {{?RFC7668}}. This RFC primarily addresses star topology, while RFC 9159 {{?RFC9159}} extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.
 
 By adhering to the Internet Protocol Support Profile (IPSP), devices such as personal computers and smartphones can harness IPv6 over BLE, presenting an alternative connectivity solution. This integration amalgamates the benefits of IPv6's robust addressing and routing capabilities with Bluetooth's simplicity. Among these platforms, Windows stands out due to its prevalence in personal computing.
 
@@ -75,10 +75,10 @@ As per RFC 9159 {{?RFC9159}}, for IPv6 over BLE mesh networks, a multilink model
 The IPSP enables discovery of IP-enabled devices and the establishment of a link-layer connection for transporting IPv6 packets. The IPSP defines the node and router roles for devices that consume/originate IPv6 packets and for devices that can route IPv6 packets, respectively.
 
 ### Address Configuration
-RFC 7668 specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non link local address, and multiple addresses are also provided.
+RFC 7668 {{?RFC7668}} specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non link local address, and multiple addresses are also provided.
 
 ### Header Compression
-Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression as specified in RFC 6282. However, since the document focuses mainly on IPv6 over Bluetooth for non low powered devices, header compression is optional.
+Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression as specified in RFC 6282 {{?RFC6282}}. However, since the document focuses mainly on IPv6 over Bluetooth for non low powered devices, header compression is optional, though it is provided in the implementation.
 
 # Implementation of IPv6 over Bluetooth on Windows
 
@@ -90,7 +90,7 @@ There are two primary components to this implementation:
 - WFP callout driver
 - Packet processing app
 
-Additionally, there are four DLL libraries in this project to support functionality in the Packet Processing App:
+Additionally, there are four libraries in this project to support functionality in the Packet Processing App:
 
 - A custom driver interoperability library.
 - A Bluetooth GATT library, also including device enumeration and discovery.
@@ -134,7 +134,7 @@ The architecture consists of components operating in the user mode as well as ke
 
 The kernel mode involves low level operations such as filtering packets through network interfaces and establishing Bluetooth links. The driver is a core component that filters outgoing IPv6 packets and can also filter incoming ones, forwarding them appropriately. It also can push a given IPv6 packet embedded in a Bluetooth packet, into the network stack, for an appropriate application to consume.
 
-Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the packet's transition from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, is also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.
+Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the packet's transition from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.
 
 ## Components
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
