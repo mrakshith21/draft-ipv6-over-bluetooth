@@ -112,12 +112,12 @@ Table of Contents
    Bluetooth is a low-power wireless technology designed for short-range
    control and monitoring applications.  To enhance IoT capabilities,
    the IETF has developed specifications for IPv6 over BLE devices,
-   outlined in RFC 7668.  This RFC primarily addresses star topology,
-   while RFC 9159 extends IPv6 mesh networking capabilities over BLE
-   links.  Despite its focus on low-power devices, the implementation of
-   IPv6 over BLE can extend to non-low powered platforms like Windows,
-   Linux, Android OS, and iPhone running on personal computers and
-   mobile phones.
+   outlined in RFC 7668 [RFC7668].  This RFC primarily addresses star
+   topology, while RFC 9159 [RFC9159] extends IPv6 mesh networking
+   capabilities over BLE links.  Despite its focus on low-power devices,
+   the implementation of IPv6 over BLE can extend to non-low powered
+   platforms like Windows, Linux, Android OS, and iPhone running on
+   personal computers and mobile phones.
 
    By adhering to the Internet Protocol Support Profile (IPSP), devices
    such as personal computers and smartphones can harness IPv6 over BLE,
@@ -172,21 +172,22 @@ Table of Contents
 
 1.1.3.  Address Configuration
 
-   RFC 7668 specifies a stateless address autoconfiguration scheme for
-   all nodes in the network.  An IPv6 link-local address is assigned to
-   the Bluetooth interface based on the 48-bit Bluetooth device address.
-   A 64-bit address is generated from the Bluetooth address, which is
-   prepended with fe80::/64.  Mechanisms for registering a non link
-   local address, and multiple addresses are also provided.
+   RFC 7668 [RFC7668] specifies a stateless address autoconfiguration
+   scheme for all nodes in the network.  An IPv6 link-local address is
+   assigned to the Bluetooth interface based on the 48-bit Bluetooth
+   device address.  A 64-bit address is generated from the Bluetooth
+   address, which is prepended with fe80::/64.  Mechanisms for
+   registering a non link local address, and multiple addresses are also
+   provided.
 
 1.1.4.  Header Compression
 
    Since BLE communication aims to conserve power, IPv6 over BLE
    involves header compression to reduce the size of IPv6 packets.  This
    compression is based on the 6LoWPAN IPv6 header compression as
-   specified in RFC 6282.  However, since the document focuses mainly on
-   IPv6 over Bluetooth for non low powered devices, header compression
-   is optional.
+   specified in RFC 6282 [RFC6282].  However, since the document focuses
+   mainly on IPv6 over Bluetooth for non low powered devices, header
+   compression is optional, though it is provided in the implementation.
 
 2.  Implementation of IPv6 over Bluetooth on Windows
 
@@ -201,7 +202,7 @@ Table of Contents
 
    *  Packet processing app
 
-   Additionally, there are four DLL libraries in this project to support
+   Additionally, there are four libraries in this project to support
    functionality in the Packet Processing App:
 
    *  A custom driver interoperability library.
@@ -258,9 +259,9 @@ Table of Contents
    and initiates transfer of Bluetooth packets or receipt.  It makes use
    of libraries - a 6LowPAN library for address and header compression,
    a driver interop library to communicate with the driver.  The GATT
-   server, is also initiated by the Packet Processing App, provides
-   IPSP, supporting IPv6 over Bluetooth and operates on all node and
-   allowing them to act as both clients and servers as needed.
+   server, also initiated by the Packet Processing App, provides IPSP,
+   supporting IPv6 over Bluetooth and operates on all node and allowing
+   them to act as both clients and servers as needed.
 
 2.2.  Components
 

@@ -1253,7 +1253,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668. This RFC primarily addresses star topology, while RFC 9159 extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-1">Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span>. This RFC primarily addresses star topology, while RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span> extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">By adhering to the Internet Protocol Support Profile (IPSP), devices such as personal computers and smartphones can harness IPv6 over BLE, presenting an alternative connectivity solution. This integration amalgamates the benefits of IPv6's robust addressing and routing capabilities with Bluetooth's simplicity. Among these platforms, Windows stands out due to its prevalence in personal computing.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. This document presents an implementation of IPv6 over Bluetooth on Windows. It also discusses a few use cases of this technology in disaster recovery, near field chat and IoT gateways.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <div id="background">
@@ -1283,7 +1283,7 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
           <h4 id="name-address-configuration">
 <a href="#section-1.1.3" class="section-number selfRef">1.1.3. </a><a href="#name-address-configuration" class="section-name selfRef">Address Configuration</a>
           </h4>
-<p id="section-1.1.3-1">RFC 7668 specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non link local address, and multiple addresses are also provided.<a href="#section-1.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-1.1.3-1">RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non link local address, and multiple addresses are also provided.<a href="#section-1.1.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="header-compression">
@@ -1291,7 +1291,7 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
           <h4 id="name-header-compression">
 <a href="#section-1.1.4" class="section-number selfRef">1.1.4. </a><a href="#name-header-compression" class="section-name selfRef">Header Compression</a>
           </h4>
-<p id="section-1.1.4-1">Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression as specified in RFC 6282. However, since the document focuses mainly on IPv6 over Bluetooth for non low powered devices, header compression is optional.<a href="#section-1.1.4-1" class="pilcrow">¶</a></p>
+<p id="section-1.1.4-1">Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression as specified in RFC 6282 <span>[<a href="#RFC6282" class="cite xref">RFC6282</a>]</span>. However, since the document focuses mainly on IPv6 over Bluetooth for non low powered devices, header compression is optional, though it is provided in the implementation.<a href="#section-1.1.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1318,7 +1318,7 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
             <p id="section-2.1-2.2.1">Packet processing app<a href="#section-2.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-2.1-3">Additionally, there are four DLL libraries in this project to support functionality in the Packet Processing App:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
+<p id="section-2.1-3">Additionally, there are four libraries in this project to support functionality in the Packet Processing App:<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.1-4.1">
             <p id="section-2.1-4.1.1">A custom driver interoperability library.<a href="#section-2.1-4.1.1" class="pilcrow">¶</a></p>
@@ -1367,7 +1367,7 @@ Kernel mode                  |                |
 </div>
 <p id="section-2.1-7">The architecture consists of components operating in the user mode as well as kernel mode.<a href="#section-2.1-7" class="pilcrow">¶</a></p>
 <p id="section-2.1-8">The kernel mode involves low level operations such as filtering packets through network interfaces and establishing Bluetooth links. The driver is a core component that filters outgoing IPv6 packets and can also filter incoming ones, forwarding them appropriately. It also can push a given IPv6 packet embedded in a Bluetooth packet, into the network stack, for an appropriate application to consume.<a href="#section-2.1-8" class="pilcrow">¶</a></p>
-<p id="section-2.1-9">Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the packet's transition from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, is also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.<a href="#section-2.1-9" class="pilcrow">¶</a></p>
+<p id="section-2.1-9">Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the packet's transition from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.<a href="#section-2.1-9" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="components">
