@@ -107,19 +107,19 @@ The componets described in the diagram are briefly described below:
                     |    6LoWPAN   |
                     | library (DLL)|
                     +--------------+
-				                       |
                            |
                            |
-+----------------+	  +--------------+	 +----------------+
- | Driver interop |	 |    Packet    |	 | Bluetooth GATT |
- | library (DLL)  |--|  processing  |--| library (DLL)  |
- +----------------+	 |    UWP app   |	 +----------------+
-          |          +--------------+		         |
-          +------------------+			               |
-User mode			                 |			               |
------------------------------|------------------|----------
-Kernel mode			               |			               |
-				                         |			               |
+                           |
++----------------+  +--------------+  +----------------+
+| Driver interop |  |    Packet    |  | Bluetooth GATT |
+| library (DLL)  |--|  processing  |--| library (DLL)  |
++----------------+  |    UWP app   |  +----------------+
+          |         +--------------+	      |
+          +------------------+		      |
+User mode	             |		      |
+-----------------------------|----------------|-------------
+Kernel mode			              |			               |
+										|			               |
  +--------------+		          |		         +--------------+
  |      UDP     |		          |		         | Bluetooth LE |
  +--------------+	  +---------------+    +--------------+
