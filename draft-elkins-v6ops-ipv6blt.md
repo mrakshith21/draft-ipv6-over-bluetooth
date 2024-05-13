@@ -205,7 +205,7 @@ There are some things to consider:
 ## Connecting IoT Gateways
 IPv6 over Bluetooth communication can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which then relay data to the central router for external connectivity.
 In these type of networks two roles can be identified. A device in the central role (The Border router) has traditionally been able to manage multiple simultaneous connections with a number of devices in the peripheral role. A peripheral is commonly connected to a single central node or it can also connect to multiple centrals at the same time. These type of networks typically follow a star topology where a router typically implements the Bluetooth LE central role and the rest of nodes implement the Bluetooth LE peripheral role. mesh networking and/or parallel connectivity to multiple centrals at a time can also be looked into. 
-<!-- Figure 3: Star Architecture -->
+<!-- Figure 4: Star Architecture -->
 
 ~~~
 Peripheral ---.      .--- Peripheral
