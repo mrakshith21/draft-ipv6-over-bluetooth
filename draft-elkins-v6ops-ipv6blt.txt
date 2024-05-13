@@ -203,32 +203,32 @@ Table of Contents
 
    The componets described in the diagram are briefly described below:
 
-                    +--------------+
-                    |    6LoWPAN   |
-                    | library (DLL)|
-                    +--------------+
-                           |
-                           |
-                           |
-+----------------+  +--------------+  +----------------+
-| Driver interop |  |    Packet    |  | Bluetooth GATT |
-| library (DLL)  |--|  processing  |--| library (DLL)  |
-+----------------+  |    UWP app   |  +----------------+
-          |         +--------------+          |
-          +------------------+                |
-User mode                    |                |
------------------------------|----------------|-------------
-Kernel mode                                   |                                |
-                                                                                |                                      |
- +--------------+                         |                      +--------------+
- |      UDP     |                         |                      | Bluetooth LE |
- +--------------+         +---------------+    +--------------+
- |     IPv6     |         |  WFP callout  |        |   Bluetooth  |
- +--------------+         |    driver     |        |     L2CAP    |
- |Wi-Fi/Ethernet|   |(IPv6ToBle.sys)|      +--------------+
- +--------------+   +---------------+
+                       +--------------+
+                       |    6LoWPAN   |
+                       | library (DLL)|
+                       +--------------+
+                              |
+                              |
+                              |
+   +----------------+  +--------------+  +----------------+
+   | Driver interop |  |    Packet    |  | Bluetooth GATT |
+   | library (DLL)  |--|  processing  |--| library (DLL)  |
+   +----------------+  |    UWP app   |  +----------------+
+             |         +--------------+          |
+             +------------------+                |
+   User mode                    |                |
+   -----------------------------|----------------|-------------
+   Kernel mode                  |                |
+                                |                |
+    +--------------+            |             +--------------+
+    |      UDP     |            |             | Bluetooth LE |
+    +--------------+     +---------------+    +--------------+
+    |     IPv6     |     |  WFP callout  |    |   Bluetooth  |
+    +--------------+     |    driver     |    |     L2CAP    |
+    |Wi-Fi/Ethernet|     |(IPv6ToBle.sys)|    +--------------+
+    +--------------+     +---------------+
 
-                        Figure 1: Architecture
+                           Figure 1: Architecture
 
    *  WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge
       between the TCP/IP stack and the Bluetooth stack, filtering
