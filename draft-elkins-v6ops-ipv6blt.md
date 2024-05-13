@@ -118,15 +118,15 @@ The componets described in the diagram are briefly described below:
           +------------------+		      |
 User mode	             |		      |
 -----------------------------|----------------|-------------
-Kernel mode			              |			               |
-										|			               |
- +--------------+		          |		         +--------------+
- |      UDP     |		          |		         | Bluetooth LE |
- +--------------+	  +---------------+    +--------------+
- |     IPv6     |	  |  WFP callout  |	   |   Bluetooth  |
- +--------------+	  |    driver     |	   |     L2CAP    |
- |Wi-Fi/Ethernet|   |(IPv6ToBle.sys)|	   +--------------+
- +--------------+   +---------------+
+Kernel mode		     |		      |
+                             |		      |
+ +--------------+	     |		   +--------------+
+ |      UDP     |	     |		   | Bluetooth LE |
+ +--------------+     +---------------+    +--------------+
+ |     IPv6     |     |  WFP callout  |	   |   Bluetooth  |
+ +--------------+     |    driver     |	   |     L2CAP    |
+ |Wi-Fi/Ethernet|     |(IPv6ToBle.sys)|	   +--------------+
+ +--------------+     +---------------+
 ~~~
 {: #fig-arch title="Architecture"}
 
