@@ -1336,19 +1336,19 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
                     |    6LoWPAN   |
                     | library (DLL)|
                     +--------------+
-                                                       |
                            |
                            |
-+----------------+        +--------------+       +----------------+
- | Driver interop |      |    Packet    |        | Bluetooth GATT |
- | library (DLL)  |--|  processing  |--| library (DLL)  |
- +----------------+      |    UWP app   |        +----------------+
-          |          +--------------+                    |
-          +------------------+                                 |
-User mode                                        |                                     |
------------------------------|------------------|----------
-Kernel mode                                    |                                       |
-                                                         |                                     |
+                           |
++----------------+  +--------------+  +----------------+
+| Driver interop |  |    Packet    |  | Bluetooth GATT |
+| library (DLL)  |--|  processing  |--| library (DLL)  |
++----------------+  |    UWP app   |  +----------------+
+          |         +--------------+          |
+          +------------------+                |
+User mode                    |                |
+-----------------------------|----------------|-------------
+Kernel mode                                   |                                |
+                                                                                |                                      |
  +--------------+                         |                      +--------------+
  |      UDP     |                         |                      | Bluetooth LE |
  +--------------+         +---------------+    +--------------+
