@@ -5,11 +5,11 @@
 IPv6 Operations                                                N. Elkins
 Internet-Draft                                     Inside Products, Inc.
 Intended status: Informational                           M. P. Tahiliani
-Expires: 13 November 2024                                       R. Mohan
+Expires: 14 November 2024                                       R. Mohan
                                                               T. Sankpal
                                                          S. B. Nidamboor
                                                           NITK Surathkal
-                                                             12 May 2024
+                                                             13 May 2024
 
 
                           IPv6 Over Bluetooth
@@ -56,7 +56,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 November 2024.
+   This Internet-Draft will expire on 14 November 2024.
 
 Copyright Notice
 
@@ -203,6 +203,33 @@ Table of Contents
 
    The componets described in the diagram are briefly described below:
 
+                    +--------------+
+                    |    6LoWPAN   |
+                                         | library (DLL)|
+                    +--------------+
+                                                       |
+                           |
+                           |
++----------------+        +--------------+       +----------------+
+ | Driver interop |      |    Packet    |        | Bluetooth GATT |
+ | library (DLL)  |--|  processing  |--| library (DLL)  |
+ +----------------+      |    UWP app   |        +----------------+
+          |          +--------------+                    |
+          +------------------+                                 |
+User mode                                        |                                     |
+-----------------------------|------------------|----------
+Kernel mode                                    |                                       |
+                                                         |                                     |
+ +--------------+                         |                      +--------------+
+ |      UDP     |                         |                      | Bluetooth LE |
+ +--------------+         +---------------+    +--------------+
+ |     IPv6     |         |  WFP callout  |        |   Bluetooth  |
+ +--------------+         |    driver     |        |     L2CAP    |
+ |Wi-Fi/Ethernet|   |(IPv6ToBle.sys)|      +--------------+
+ +--------------+   +---------------+
+
+                        Figure 1: Architecture
+
    *  WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge
       between the TCP/IP stack and the Bluetooth stack, filtering
       traffic destined for BLE devices and managing outbound traffic.
@@ -268,7 +295,7 @@ Table of Contents
    |                          |
    +--------------------------+
 
-                          Figure 1: Packet layout
+                          Figure 2: Packet layout
 
    A custom lua dissector to dissect the IPv6 packet within the
    Bluetooth ATT Value field was designed.  In the application, the IPv6

@@ -1035,7 +1035,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Elkins, et al.</td>
-<td class="center">Expires 13 November 2024</td>
+<td class="center">Expires 14 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-elkins-v6ops-ipv6blt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-12" class="published">12 May 2024</time>
+<time datetime="2024-05-13" class="published">13 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-13">13 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-14">14 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1119,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 14 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1328,21 +1328,55 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
         </ul>
 <p id="section-2.1-5">The following diagram illustrates the system architecture for this solution:<a href="#section-2.1-5" class="pilcrow">¶</a></p>
 <p id="section-2.1-6">The componets described in the diagram are briefly described below:<a href="#section-2.1-6" class="pilcrow">¶</a></p>
+<span id="name-architecture-2"></span><div id="fig-arch">
+<figure id="figure-1">
+          <div class="alignLeft art-text artwork" id="section-2.1-7.1">
+<pre>
+                    +--------------+
+                    |    6LoWPAN   |
+                                         | library (DLL)|
+                    +--------------+
+                                                       |
+                           |
+                           |
++----------------+        +--------------+       +----------------+
+ | Driver interop |      |    Packet    |        | Bluetooth GATT |
+ | library (DLL)  |--|  processing  |--| library (DLL)  |
+ +----------------+      |    UWP app   |        +----------------+
+          |          +--------------+                    |
+          +------------------+                                 |
+User mode                                        |                                     |
+-----------------------------|------------------|----------
+Kernel mode                                    |                                       |
+                                                         |                                     |
+ +--------------+                         |                      +--------------+
+ |      UDP     |                         |                      | Bluetooth LE |
+ +--------------+         +---------------+    +--------------+
+ |     IPv6     |         |  WFP callout  |        |   Bluetooth  |
+ +--------------+         |    driver     |        |     L2CAP    |
+ |Wi-Fi/Ethernet|   |(IPv6ToBle.sys)|      +--------------+
+ +--------------+   +---------------+
+</pre>
+</div>
+<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<a href="#name-architecture-2" class="selfRef">Architecture</a>
+          </figcaption></figure>
+</div>
 <ul class="normal">
-<li class="normal" id="section-2.1-7.1">
-            <p id="section-2.1-7.1.1">WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge between the TCP/IP stack and the Bluetooth stack, filtering traffic destined for BLE devices and managing outbound traffic.<a href="#section-2.1-7.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-2.1-8.1">
+            <p id="section-2.1-8.1.1">WFP Callout Driver (IPv6ToBle.sys): This driver acts as a bridge between the TCP/IP stack and the Bluetooth stack, filtering traffic destined for BLE devices and managing outbound traffic.<a href="#section-2.1-8.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-7.2">
-            <p id="section-2.1-7.2.1">Packet Processing App: This user-mode component completes the bridge between TCP/IP and Bluetooth LE stacks. It handles tasks like obtaining IPv6 addresses, scanning for compatible BLE devices, compressing IPv6 headers, and transferring packets over BLE.<a href="#section-2.1-7.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.1-8.2">
+            <p id="section-2.1-8.2.1">Packet Processing App: This user-mode component completes the bridge between TCP/IP and Bluetooth LE stacks. It handles tasks like obtaining IPv6 addresses, scanning for compatible BLE devices, compressing IPv6 headers, and transferring packets over BLE.<a href="#section-2.1-8.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-7.3">
-            <p id="section-2.1-7.3.1">Driver Interop Library: Used by the packet processing app to communicate with the driver, supporting both synchronous and asynchronous commands.<a href="#section-2.1-7.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.1-8.3">
+            <p id="section-2.1-8.3.1">Driver Interop Library: Used by the packet processing app to communicate with the driver, supporting both synchronous and asynchronous commands.<a href="#section-2.1-8.3.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-7.4">
-            <p id="section-2.1-7.4.1">Bluetooth GATT Library: Encompasses GATT server and client functionality, advertising services and facilitating packet transfer between devices.<a href="#section-2.1-7.4.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.1-8.4">
+            <p id="section-2.1-8.4.1">Bluetooth GATT Library: Encompasses GATT server and client functionality, advertising services and facilitating packet transfer between devices.<a href="#section-2.1-8.4.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-2.1-7.5">
-            <p id="section-2.1-7.5.1">6LoWPAN Library: Implements header compression and stateless auto-configuration, for BLE communication.<a href="#section-2.1-7.5.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-2.1-8.5">
+            <p id="section-2.1-8.5.1">6LoWPAN Library: Implements header compression and stateless auto-configuration, for BLE communication.<a href="#section-2.1-8.5.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 </section>
@@ -1384,7 +1418,7 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
           </h4>
 <p id="section-2.2.4-1">An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. It consists of the following:<a href="#section-2.2.4-1" class="pilcrow">¶</a></p>
 <span id="name-packet-layout"></span><div id="fig-packet">
-<figure id="figure-1">
+<figure id="figure-2">
             <div class="alignLeft art-text artwork" id="section-2.2.4-2.1">
 <pre>
 +--------------------------+
@@ -1395,7 +1429,7 @@ The IPSP enables discovery of IP-enabled devices and the establishment of a link
 
 </pre>
 </div>
-<figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
+<figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-packet-layout" class="selfRef">Packet layout</a>
             </figcaption></figure>
 </div>
