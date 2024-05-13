@@ -203,7 +203,14 @@ There are some things to consider:
 ## Near field chat
 
 ## Connecting IoT Gateways
-
+Pv6 over Bluetooth communication can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which then relay data to the central router for external connectivity.
+In these type of networks two roles can be identified . A device in the central role (The Border router) has traditionally been able to manage multiple simultaneous connections with a number of devices in the peripheral role. A peripheral is commonly connected to a single central node or it can also connect to multiple centrals at the same time. These type of networks typically follow a star topology where a router typically implements the Bluetooth LE central role and the rest of nodes implement the Bluetooth LE peripheral role. mesh networking and/or parallel connectivity to multiple centrals at a time can also be looked into. 
+Peripheral ---.      .--- Peripheral
+               \    /
+Peripheral ---Central--- Peripheral
+               /    \
+ Peripheral---'      '--- Peripheral
+In Bluetooth LE, direct wireless communication only takes place between a central and a peripheral.  This means that inherently the Bluetooth LE star represents a hub-and-spokes link model. Nevertheless, two peripherals may communicate through the central by using IP routing functionality. peripherals each have a separate link to the central and the central acts as an IPv6 router rather than a link-layer switch. As IPv6 over Bluetooth LE is intended for constrained nodes such as Internet of Things use cases, the complexity of implementing a separate subnet on each peripheral-central link and routing between the subnets appears to be excessive.  In the Bluetooth LE case, treating the collection of point-to-point links between a central and its connected peripherals as a single multilink subnet rather than a multiplicity of separate subnets is considered beneficial.
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
