@@ -59,11 +59,48 @@ IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack
 
 Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668 {{?RFC7668}}. This RFC primarily addresses star topology, while RFC 9159 {{?RFC9159}} extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.
 
-By adhering to the Internet Protocol Support Profile (IPSP), devices such as personal computers and smartphones can harness IPv6 over BLE, presenting an alternative connectivity solution. This integration amalgamates the benefits of IPv6's robust addressing and routing capabilities with Bluetooth's simplicity. Among these platforms, Windows stands out due to its prevalence in personal computing.
+By adhering to the Internet Protocol Support Profile (IPSP), published by the Bluetooth SIG, devices such as personal computers and smartphones can harness IPv6 over Bluetooth, presenting an alternative connectivity solution. This integration amalgamates the benefits of IPv6's robust addressing and routing capabilities with Bluetooth's simplicity.
 
-Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. This document presents an implementation of IPv6 over Bluetooth on Windows. It also discusses a few use cases of this technology in disaster recovery, near field chat and IoT gateways.
+Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. Furthermore, in the case of unconstrained devices, header compression is not necessary (but can be kept optional if the Bluetooth MTU size is small, or if low powered devices are also involved). This document discusses a few use cases of this technology in disaster recovery, near field chat and IoT gateways. It also presents an implementation of IPv6 over Bluetooth on Windows.
 
-## Background
+# Use cases
+
+IPv6 over Bluetooth can be used as an alternate technology for connecting devices, while using the vast features of IP as well as the low powered interface of Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems, we can facilitate the use of this technology for non low powered devices and explore its potential. This section discusses some use cases.
+
+## Disaster recovery
+
+In a disaster area where traditional means of communication like the internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. Devices can form adhoc networks with each other using Ethernet cables or Bluetooth, but it is insufficient to connect the entire network. In such a situation, IPv6 over Bluetooth can be a potential means of forming a network of connected devices.
+
+We make the assumption that devices are Bluetooth enabled and are in Bluetooth range, so as to form a network of Bluetooth devices. As described in RFC 9159 {{?RFC9159}} IPv6 over Bluetooth for Mesh Networks, devices can then take up the roles similar to a 6LN, or 6LR. In other words, some devices act as nodes, and some as routers as well. Note that routers forward packets only within the network. In the event that the Internet is accessible for some of the devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but mobile phones as well, which leads to the formation of a network with more links.
+
+There are some things to consider:
+
+- Devices must enforce IPv6 over IPv4 since the technology is only designed to transmit IPv6 packets over Bluetooth.
+- Selection of devices as routers, or border routers is a key challenge. The border router must ensure that devices in its domain have unique addresses. The network also needs to have an IPv6 prefix, which is to be determined.
+
+## Near field chat
+
+TODO
+
+## IoT Gateways
+
+Use cases in building management, healthcare, workplaces, manufacturing, logistics and hospitality have introduced low-power IoT devices into their environments. These devices typically do not support IP-based interfaces, hence there is a need for gateway functions to allow these devices to communicate with the applications that manage them. IoT gateways provide various functionalities depending on the kind of devices they are connected to and their functionality. For example, authentication and authorization of application clients that will access device, interfaces that allow for bi-directional communication to non-IP device and one or more channels to process requests, responses, and asymmetric communciations with the non-IP radio resources (access points) in the system and so on. IoT networks make use of such customized gateways which communicate with each other and external networks to fulfill the required functionality.
+
+IPv6 over Bluetooth can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which then relay data to the central router for external connectivity.
+
+
+~~~
+               Iot Gateway 1
+                     |
+                     |
+IoT Gateway 2 --- Border Router ------------- Internet
+                     |
+                     |
+               IoT Gateway 3
+~~~
+{: #fig-gateways title="Multiple IoT gateways connected through a border router"}
+
+## Relevant Technology
 
 ### GATT
 
@@ -205,44 +242,6 @@ RFC 7668 {{?RFC7668}} specifies RFC 6282 {{?RFC6282}} for 6LoWPAN
 
 The 6LoWPAN library of the project fulfills the first and third goals, the second goal is automatically performed at the Bluetooth L2CAP layer by Windows Bluetooth.
 In particular, IPv6 header compression is implemented as per RFC 6282 {{?RFC6282}}, and IPv6 address compression is implemented as per RFC 7668 {{?RFC7668}}.
-
-# Use cases
-
-IPv6 over Bluetooth can be used as an alternate technology for connecting devices, while using the vast features of IP as well as a low powered interface using Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems such as Windows, Linux, Android, iPhone and so on, we can facilitate the use of this technology for non low powered devices as well and explore its potential. The following discusses some use cases.
-
-## Disaster recovery
-
-In a disaster area where traditional means of communication like the internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. Devices can form adhoc networks with each other using Ethernet cables or Bluetooth, but it is insufficient to connect the entire network. In such a situation, IPv6 over Bluetooth can be a potential means of forming a network of connected devices.
-
-We make the assumption that devices are Bluetooth enabled and are in Bluetooth range, so as to form a network of Bluetooth devices. As described in RFC 9159 {{?RFC9159}} IPv6 over Bluetooth for Mesh Networks, devices can then take up the roles similar to a 6LN, or 6LR. In other words, some devices act as nodes, and some as routers as well. Note that routers forward packets only within the network. In the event that the Internet is accessible for some of the devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but mobile phones as well, which leads to the formation of a network with more links.
-
-There are some things to consider:
-
-- Devices must enforce IPv6 over IPv4 since the technology is only designed to transmit IPv6 packets over Bluetooth.
-- Selection of devices as routers, or border routers is a key challenge. The border router must ensure that devices in its domain have unique addresses. The network also needs to have an IPv6 prefix, which is to be determined.
-
-## Near field chat
-
-TODO
-
-## IoT Gateways
-
-Use cases in building management, healthcare, workplaces, manufacturing, logistics and hospitality have introduced low-power IoT devices into their environments. These devices typically do not support IP-based interfaces, hence there is a need for gateway functions to allow these devices to communicate with the applications that manage them. IoT gateways provide various functionalities depending on the kind of devices they are connected to and their functionality. For example, authentication and authorization of application clients that will access device, interfaces that allow for bi-directional communication to non-IP device and one or more channels to process requests, responses, and asymmetric communciations with the non-IP radio resources (access points) in the system and so on. IoT networks make use of such customized gateways which communicate with each other and external networks to fulfill the required functionality.
-
-IPv6 over Bluetooth can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which then relay data to the central router for external connectivity.
-
-
-~~~
-               Iot Gateway 1
-                     |
-                     |
-IoT Gateway 2 --- Border Router ------------- Internet
-                     |
-                     |
-               IoT Gateway 3
-~~~
-{: #fig-gateways title="Multiple IoT gateways connected through a border router"}
-
 
 # Conventions and Definitions
 
