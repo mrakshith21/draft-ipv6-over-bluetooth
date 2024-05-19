@@ -78,9 +78,13 @@ There are some things to consider:
 - Devices must enforce IPv6 over IPv4 since the technology is only designed to transmit IPv6 packets over Bluetooth.
 - Selection of devices as routers, or border routers is a key challenge. The border router must ensure that devices in its domain have unique addresses. The network also needs to have an IPv6 prefix, which is to be determined.
 
-## Near field chat
+## Chat application
 
-TODO
+Bluetooth chat gained prominence through Bridgefy during the Hong Kong protests when the Internet was shut down. IPv6 over Bluetooth offers an enhanced alternative, allowing any network application, including chat apps, to operate similarly as on IPv6. In remote areas or emergencies where Internet access is unavailable, local networks can be established using IPv6 over Bluetooth.
+
+A crucial consideration is the lack of server communication during Internet outages. Therefore, chat applications must handle communication and data storage locally, bypassing the need for a server to relay messages. Thus, direct message transmission between devices is necessary. Assuming devices maintain constant IPv6 addresses (link-local addresses) within the network, a user discovery process becomes essential. Devices can discover each other similarly to Bluetooth scanning, but the network can encompass a larger number of devices than typical Bluetooth range allows.
+
+One of the advantages of this mechanism over plain Bluetooth is that devices acting as routers can forward packets using established routing protocols. Otherwise, the application would need to manage this, resulting in increased burden on the application and higher delays. IPv6 over Bluetooth thus provides a more efficient and scalable solution for local communication during Internet disruptions.
 
 ## IoT Gateways
 
