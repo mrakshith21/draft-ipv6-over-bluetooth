@@ -5,11 +5,11 @@
 IPv6 Operations                                                N. Elkins
 Internet-Draft                                     Inside Products, Inc.
 Intended status: Informational                           M. P. Tahiliani
-Expires: 19 November 2024                                       R. Mohan
+Expires: 20 November 2024                                       R. Mohan
                                                               T. Sankpal
                                                          S. B. Nidamboor
                                                           NITK Surathkal
-                                                             18 May 2024
+                                                             19 May 2024
 
 
             IPv6 Over Bluetooth for Non Low Powered Devices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 November 2024.
+   This Internet-Draft will expire on 20 November 2024.
 
 Copyright Notice
 
@@ -81,7 +81,7 @@ Table of Contents
    1.  Introduction
    2.  Use cases
      2.1.  Disaster recovery
-     2.2.  Near field chat
+     2.2.  Chat application
      2.3.  IoT Gateways
      2.4.  Relevant Technology
        2.4.1.  GATT
@@ -182,9 +182,32 @@ Table of Contents
       domain have unique addresses.  The network also needs to have an
       IPv6 prefix, which is to be determined.
 
-2.2.  Near field chat
+2.2.  Chat application
 
-   TODO
+   Bluetooth chat gained prominence through Bridgefy during the Hong
+   Kong protests when the Internet was shut down.  IPv6 over Bluetooth
+   offers an enhanced alternative, allowing any network application,
+   including chat apps, to operate similarly as on IPv6.  In remote
+   areas or emergencies where Internet access is unavailable, local
+   networks can be established using IPv6 over Bluetooth.
+
+   A crucial consideration is the lack of server communication during
+   Internet outages.  Therefore, chat applications must handle
+   communication and data storage locally, bypassing the need for a
+   server to relay messages.  Thus, direct message transmission between
+   devices is necessary.  Assuming devices maintain constant IPv6
+   addresses (link-local addresses) within the network, a user discovery
+   process becomes essential.  Devices can discover each other similarly
+   to Bluetooth scanning, but the network can encompass a larger number
+   of devices than typical Bluetooth range allows.
+
+   One of the advantages of this mechanism over plain Bluetooth is that
+   devices acting as routers can forward packets using established
+   routing protocols.  Otherwise, the application would need to manage
+   this, resulting in increased burden on the application and higher
+   delays.  IPv6 over Bluetooth thus provides a more efficient and
+   scalable solution for local communication during Internet
+   disruptions.
 
 2.3.  IoT Gateways
 

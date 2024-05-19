@@ -1035,7 +1035,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Elkins, et al.</td>
-<td class="center">Expires 19 November 2024</td>
+<td class="center">Expires 20 November 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-elkins-v6ops-ipv6blt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-18" class="published">18 May 2024</time>
+<time datetime="2024-05-19" class="published">19 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-19">19 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-11-20">20 November 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1119,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1158,7 +1158,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
                 <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-disaster-recovery" class="internal xref">Disaster recovery</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-near-field-chat" class="internal xref">Near field chat</a></p>
+                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-chat-application" class="internal xref">Chat application</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
                 <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-iot-gateways" class="internal xref">IoT Gateways</a></p>
@@ -1280,12 +1280,14 @@ svg :is([fill="white"], [fill^="#fff"]) {
         </ul>
 </section>
 </div>
-<div id="near-field-chat">
+<div id="chat-application">
 <section id="section-2.2">
-        <h3 id="name-near-field-chat">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-near-field-chat" class="section-name selfRef">Near field chat</a>
+        <h3 id="name-chat-application">
+<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-chat-application" class="section-name selfRef">Chat application</a>
         </h3>
-<p id="section-2.2-1">TODO<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-1">Bluetooth chat gained prominence through Bridgefy during the Hong Kong protests when the Internet was shut down. IPv6 over Bluetooth offers an enhanced alternative, allowing any network application, including chat apps, to operate similarly as on IPv6. In remote areas or emergencies where Internet access is unavailable, local networks can be established using IPv6 over Bluetooth.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.2-2">A crucial consideration is the lack of server communication during Internet outages. Therefore, chat applications must handle communication and data storage locally, bypassing the need for a server to relay messages. Thus, direct message transmission between devices is necessary. Assuming devices maintain constant IPv6 addresses (link-local addresses) within the network, a user discovery process becomes essential. Devices can discover each other similarly to Bluetooth scanning, but the network can encompass a larger number of devices than typical Bluetooth range allows.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
+<p id="section-2.2-3">One of the advantages of this mechanism over plain Bluetooth is that devices acting as routers can forward packets using established routing protocols. Otherwise, the application would need to manage this, resulting in increased burden on the application and higher delays. IPv6 over Bluetooth thus provides a more efficient and scalable solution for local communication during Internet disruptions.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iot-gateways">
