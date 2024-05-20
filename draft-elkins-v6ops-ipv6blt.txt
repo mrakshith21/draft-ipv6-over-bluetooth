@@ -5,11 +5,11 @@
 IPv6 Operations                                                N. Elkins
 Internet-Draft                                     Inside Products, Inc.
 Intended status: Informational                           M. P. Tahiliani
-Expires: 20 November 2024                                       R. Mohan
+Expires: 21 November 2024                                       R. Mohan
                                                               T. Sankpal
                                                          S. B. Nidamboor
                                                           NITK Surathkal
-                                                             19 May 2024
+                                                             20 May 2024
 
 
             IPv6 Over Bluetooth for Non Low Powered Devices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 November 2024.
+   This Internet-Draft will expire on 21 November 2024.
 
 Copyright Notice
 
@@ -197,7 +197,7 @@ Table of Contents
    server to relay messages.  Thus, direct message transmission between
    devices is necessary.  Assuming devices maintain constant IPv6
    addresses (link-local addresses) within the network, a user discovery
-   process becomes essential.  Devices can discover each other similarly
+   process becomes essential.  Devices can discover each other similar
    to Bluetooth scanning, but the network can encompass a larger number
    of devices than typical Bluetooth range allows.
 
