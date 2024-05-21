@@ -11,9 +11,9 @@ v: 3
 area: "Operations and Management"
 workgroup: "IPv6 Operations"
 keyword:
- - next generation
- - unicorn
- - sparkling distributed ledger
+ - ipv6
+ - bluetooth
+ - non low powered devices
 venue:
   group: "IPv6 Operations"
   type: "Working Group"
@@ -51,7 +51,7 @@ informative:
 
 --- abstract
 
-IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 {{?RFC7668}} and RFC 9159 {{?RFC9159}} describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has not been fully explored. This document proposes the use of this technology for non low powered devices with an optional header compression and also discusses some use cases.
+IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 and RFC 9159  describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has not been fully explored. This document proposes the use of this technology for non low powered devices with an optional header compression and also discusses some use cases.
 
 --- middle
 
@@ -59,7 +59,7 @@ IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack
 
 Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  To enhance IoT capabilities, the IETF has developed specifications for IPv6 over BLE devices, outlined in RFC 7668 {{?RFC7668}}. This RFC primarily addresses star topology, while RFC 9159 {{?RFC9159}} extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, the implementation of IPv6 over BLE can extend to non-low powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.
 
-By adhering to the Internet Protocol Support Profile (IPSP), published by the Bluetooth SIG, devices such as personal computers and smartphones can harness IPv6 over Bluetooth, presenting an alternative connectivity solution. This integration amalgamates the benefits of IPv6's robust addressing and routing capabilities with Bluetooth's simplicity.
+By adhering to the Internet Protocol Support Profile (IPSP), published by the Bluetooth SIG, devices such as personal computers and smartphones can harness IPv6 over Bluetooth, presenting an alternative connectivity solution. This integration amalgamates the benefits of the robust addressing of IPv6 and routing capabilities with Bluetooth.
 
 Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. Furthermore, in the case of unconstrained devices, header compression is not necessary (but can be kept optional if the Bluetooth MTU size is small, or if low powered devices are also involved). This document discusses a few use cases of this technology in disaster recovery, near field chat and IoT gateways. It also presents an implementation of IPv6 over Bluetooth on Windows.
 
@@ -79,7 +79,7 @@ In a disaster area where traditional means of communication like the internet an
 
 We make the assumption that devices are Bluetooth enabled and are in Bluetooth range, so as to form a network of Bluetooth devices. As described in RFC 9159 {{?RFC9159}} IPv6 over Bluetooth for Mesh Networks, devices can then take up the roles similar to a 6LN, or 6LR. In other words, some devices act as nodes, and some as routers as well. Note that routers forward packets only within the network. In the event that the Internet is accessible for some of the devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but mobile phones as well, which leads to the formation of a network with more links.
 
-There are some things to consider:
+There are some things to consider.
 
 - Devices must enforce IPv6 over IPv4 since the technology is only designed to transmit IPv6 packets over Bluetooth.
 - Selection of devices as routers, or border routers is a key challenge. The border router must ensure that devices in its domain have unique addresses. The network also needs to have an IPv6 prefix, which is to be determined.
@@ -118,7 +118,7 @@ GATT (Generic ATTribute Profile) defines the way that two Bluetooth Low Energy d
 
 ### IPv6 over Bluetooth networks and the IPSP
 
-As per RFC 9159 {{?RFC9159}}, for IPv6 over BLE mesh networks, a multilink model is chosen. The network consists of nodes 6LN (node), 6LR (router), and 6LBR (border router). A 6LN is a peripheral node which connects to the network through a 6LR or a 6LBR. A 6LR connects 6LN’s to other 6LR’s or 6LBR. One or more 6LBRs are connected to the Internet. A router can manage connections with a number of peripheral devices, while a peripheral is usually connected only to a central node. A single global unicast prefix is used on the whole subnet.
+As per RFC 9159 {{?RFC9159}}, for IPv6 over BLE mesh networks, a multilink model is chosen. The network consists of nodes 6LN (node), 6LR (router), and 6LBR (border router). A 6LN is a peripheral node which connects to the network through a 6LR or a 6LBR. A 6LR connects 6LNs to other 6LRs or 6LBR. One or more 6LBRs are connected to the Internet. A router can manage connections with a number of peripheral devices, while a peripheral is usually connected only to a central node. A single global unicast prefix is used on the whole subnet.
 The IPSP enables discovery of IP-enabled devices and the establishment of a link-layer connection for transporting IPv6 packets. The IPSP defines the node and router roles for devices that consume/originate IPv6 packets and for devices that can route IPv6 packets, respectively.
 
 ### Address Configuration
@@ -144,10 +144,6 @@ Additionally, there are four libraries in this project to support functionality 
 - A 6LoWPAN library.
 
 {{fig-arch}} illustrates the system architecture for this solution.
-
-<!-- ![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/d250a65d-272f-4127-a1e5-f9bf4523b23e) -->
-
-<!-- Figure 2: IPv6 over Bluetooth Architecture -->
 
 ~~~
                     +--------------+
@@ -181,7 +177,7 @@ The architecture consists of components operating in the user mode as well as ke
 
 The kernel mode involves low level operations such as filtering packets through network interfaces and establishing Bluetooth links. The driver is a core component that filters outgoing IPv6 packets and can also filter incoming ones, forwarding them appropriately. It also can push a given IPv6 packet embedded in a Bluetooth packet, into the network stack, for an appropriate application to consume.
 
-Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the packet's transition from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.
+Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the transition of the packet from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers and initiates transfer of Bluetooth packets or receipt. It makes use of libraries - a 6LowPAN library for address and header compression, a driver interop library to communicate with the driver. The GATT server, also  initiated by the Packet Processing App, provides IPSP, supporting IPv6 over Bluetooth and operates on all node and allowing them to act as both clients and servers as needed.
 
 ## Components
 The following are the components involved in the implementation of the IPv6 over Bluetooth in Windows operating system.
@@ -202,14 +198,6 @@ This is a sample application that generates UDP packets with hard coded data. Th
 ## Bluetooth packet layout
 
 An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. A sample packet captured from the application is shown in {{fig-packet}}
-
-<!-- ![image](./packet.png) -->
-<!--
-![image](https://github.com/mrakshith21/draft-ipv6-over-bluetooth/assets/78913321/60eda1f9-8be4-4a12-b6e5-98e6bf440a6e) -->
-
-<!-- Figure 3: Packet Layout -->
-
-
 
 ~~~
 +--------------------------------------------+
@@ -233,7 +221,7 @@ An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packe
 ~~~
 {: #fig-packet title="Packet layout"}
 
-A custom lua dissector to dissect the IPv6 packet within the Bluetooth ATT Value field was designed. In the application, the IPv6 packet is written to a GATT characteristic with handle 0x0018. So, the custom dissector is invoked when the ATT handle’s value is 0x0018. The buffer is then passed to the in built IPv6 dissector which dissects the data in the ‘Value’ field.
+A custom lua dissector to dissect the IPv6 packet within the Bluetooth ATT Value field was designed. In the application, the IPv6 packet is written to a GATT characteristic with handle 0x0018. So, the custom dissector is invoked when the ATT handle value is 0x0018. The buffer is then passed to the in built IPv6 dissector which dissects the data in the 'Value' field.
 
 ## Header compression
 Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is closed source. Therefore, the concept of an adaptation layer is spread across the driver and this module
