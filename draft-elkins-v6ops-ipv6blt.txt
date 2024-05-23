@@ -5,11 +5,11 @@
 IPv6 Operations                                                N. Elkins
 Internet-Draft                                     Inside Products, Inc.
 Intended status: Informational                           M. P. Tahiliani
-Expires: 21 November 2024                                       R. Mohan
+Expires: 24 November 2024                                       R. Mohan
                                                               T. Sankpal
                                                          S. B. Nidamboor
                                                           NITK Surathkal
-                                                             20 May 2024
+                                                             23 May 2024
 
 
             IPv6 Over Bluetooth for Non Low Powered Devices
@@ -60,7 +60,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 November 2024.
+   This Internet-Draft will expire on 24 November 2024.
 
 Copyright Notice
 
@@ -80,14 +80,15 @@ Table of Contents
 
    1.  Introduction
    2.  Use cases
-     2.1.  Disaster recovery
-     2.2.  Chat application
-     2.3.  IoT Gateways
-     2.4.  Relevant Technology
-       2.4.1.  GATT
-       2.4.2.  IPv6 over Bluetooth networks and the IPSP
-       2.4.3.  Address Configuration
-       2.4.4.  Header Compression
+     2.1.  Internet Shutdowns
+     2.2.  Disaster recovery
+     2.3.  Chat application
+     2.4.  IoT Gateways
+     2.5.  Relevant Technology
+       2.5.1.  GATT
+       2.5.2.  IPv6 over Bluetooth networks and the IPSP
+       2.5.3.  Address Configuration
+       2.5.4.  Header Compression
    3.  Implementation of IPv6 over Bluetooth on Windows
      3.1.  Architecture
      3.2.  Components
@@ -147,7 +148,29 @@ Table of Contents
    non low powered devices and explore its potential.  This section
    discusses some use cases.
 
-2.1.  Disaster recovery
+2.1.  Internet Shutdowns
+
+   IPv6 over Bluetooth can be particularly useful during internet
+   shutdowns for many reasons.  They can act as an alternative
+   communication during an internet shutdown, when traditional
+   communication methods (such as Wi-Fi) might be disrupted.  Bluetooth,
+   which operates on short-range radio frequencies, can provide an
+   alternative path for communication, allowing devices to connect
+   directly with each other.  Bluetooth can support mesh networking,
+   where devices connect to form a network that can deliver messages
+   across multiple hops.  This can help in maintaining a local network
+   of connected devices even when the internet is unavailable.  By using
+   IPv6, which allows for a large number of unique IP addresses, devices
+   can effectively communicate within this mesh network.
+
+   By making use of Bluetooth with IPv6, we can create a decentralized
+   networks that are less reliant on centralized internet
+   infrastructure.  This can be particularly useful in cases where the
+   internet infrastructure are frequently damaged.  The reduction in the
+   dependence on internet through the use of IPv6 over Bluetooth will
+   reduce the losses and the problems caused by the internet shutdowns.
+
+2.2.  Disaster recovery
 
    In a disaster area where traditional means of communication like the
    internet and cables are damaged or unavailable, establishing
@@ -182,7 +205,7 @@ Table of Contents
       domain have unique addresses.  The network also needs to have an
       IPv6 prefix, which is to be determined.
 
-2.2.  Chat application
+2.3.  Chat application
 
    Bluetooth chat gained prominence through Bridgefy during the Hong
    Kong protests when the Internet was shut down.  IPv6 over Bluetooth
@@ -209,7 +232,7 @@ Table of Contents
    scalable solution for local communication during Internet
    disruptions.
 
-2.3.  IoT Gateways
+2.4.  IoT Gateways
 
    Use cases in building management, healthcare, workplaces,
    manufacturing, logistics and hospitality have introduced low-power
@@ -243,9 +266,9 @@ Table of Contents
 
      Figure 1: Multiple IoT gateways connected through a border router
 
-2.4.  Relevant Technology
+2.5.  Relevant Technology
 
-2.4.1.  GATT
+2.5.1.  GATT
 
    GATT (Generic ATTribute Profile) defines the way that two Bluetooth
    Low Energy devices messages transfer between each other.  It uses a
@@ -263,7 +286,7 @@ Table of Contents
    encapsulates a single data point.  Each characteristic distinguishes
    itself via a pre-defined 16-bit or 128-bit UUID.
 
-2.4.2.  IPv6 over Bluetooth networks and the IPSP
+2.5.2.  IPv6 over Bluetooth networks and the IPSP
 
    As per RFC 9159 [RFC9159], for IPv6 over BLE mesh networks, a
    multilink model is chosen.  The network consists of nodes 6LN (node),
@@ -279,7 +302,7 @@ Table of Contents
    that consume/originate IPv6 packets and for devices that can route
    IPv6 packets, respectively.
 
-2.4.3.  Address Configuration
+2.5.3.  Address Configuration
 
    RFC 7668 [RFC7668] specifies a stateless address autoconfiguration
    scheme for all nodes in the network.  An IPv6 link-local address is
@@ -289,7 +312,7 @@ Table of Contents
    registering a non link local address, and multiple addresses are also
    provided.
 
-2.4.4.  Header Compression
+2.5.4.  Header Compression
 
    Since BLE communication aims to conserve power, IPv6 over BLE
    involves header compression to reduce the size of IPv6 packets.  This
