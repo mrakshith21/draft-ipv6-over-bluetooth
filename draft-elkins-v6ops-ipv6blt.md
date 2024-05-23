@@ -36,13 +36,13 @@ author:
     organization: NITK Surathkal
     email: "rakshith21mohan@gmail.com"
  -
-    fullname: "Tejas Sankpal"
-    organization: NITK Surathkal
-    email: "tejas@gmail.com"
- -
     fullname: "Shrinidhi Ballal Nidamboor"
     organization: NITK Surathkal
     email: "ballalshrinidhi@gmail.com"
+ -
+    fullname: "Tejas Sankpal"
+    organization: NITK Surathkal
+    email: "tejas@gmail.com"
 
 
 normative:
@@ -67,15 +67,9 @@ Adding the IPv6 over Bluetooth functionality depends on the design and flexibili
 
 IPv6 over Bluetooth can be used as an alternate technology for connecting devices, while using the vast features of IP as well as the low powered interface of Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems, we can facilitate the use of this technology for non low powered devices and explore its potential. This section discusses some use cases.
 
-## Internet Shutdowns
-
-IPv6 over Bluetooth can be particularly useful during internet shutdowns for many reasons. They can act as an alternative communication during an internet shutdown, when traditional communication methods (such as Wi-Fi) might be disrupted. Bluetooth, which operates on short-range radio frequencies, can provide an alternative path for communication, allowing devices to connect directly with each other. Bluetooth can support mesh networking, where devices connect to form a network that can deliver messages across multiple hops. This can help in maintaining a local network of connected devices even when the internet is unavailable. By using IPv6, which allows for a large number of unique IP addresses, devices can effectively communicate within this mesh network.
-
-By making use of Bluetooth with IPv6, we can create a decentralized networks that are less reliant on centralized internet infrastructure. This can be particularly useful in cases where the internet infrastructure are frequently damaged. The reduction in the dependence on internet through the use of IPv6 over Bluetooth will reduce the losses and the problems caused by the internet shutdowns.
-
 ## Disaster recovery
 
-In a disaster area where traditional means of communication like the internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. Devices can form adhoc networks with each other using Ethernet cables or Bluetooth, but it is insufficient to connect the entire network. In such a situation, IPv6 over Bluetooth can be a potential means of forming a network of connected devices.
+In a disaster area where traditional means of communication like the Internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. This also applies to cases where the Internet is shutdown. In such a situation, IPv6 over Bluetooth can be a potential means of forming a network of connected devices.
 
 We make the assumption that devices are Bluetooth enabled and are in Bluetooth range, so as to form a network of Bluetooth devices. As described in RFC 9159 {{?RFC9159}} IPv6 over Bluetooth for Mesh Networks, devices can then take up the roles similar to a 6LN, or 6LR. In other words, some devices act as nodes, and some as routers as well. Note that routers forward packets only within the network. In the event that the Internet is accessible for some of the devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but mobile phones as well, which leads to the formation of a network with more links.
 
@@ -110,22 +104,28 @@ IoT Gateway 2 --- Border Router ------------- Internet
 ~~~
 {: #fig-gateways title="Multiple IoT gateways connected through a border router"}
 
-## Relevant Technology
+# Relevant Technology
 
-### GATT
+## GATT
 
 GATT (Generic ATTribute Profile) defines the way that two Bluetooth Low Energy devices messages transfer between each other. It uses a generic data protocol called the Attribute Protocol (ATT), which is used to store services, and characteristics in a simple lookup table with 16-bit IDs (UUIDs). GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics and Control Points. Services are used to break data up into logical entities, and contain specific chunks of data called characteristics. A service can have one or more characteristics, and each service distinguishes itself from other services by means of a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services). The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point. Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.
 
-### IPv6 over Bluetooth networks and the IPSP
+## IPv6 over Bluetooth networks and the IPSP
 
 As per RFC 9159 {{?RFC9159}}, for IPv6 over BLE mesh networks, a multilink model is chosen. The network consists of nodes 6LN (node), 6LR (router), and 6LBR (border router). A 6LN is a peripheral node which connects to the network through a 6LR or a 6LBR. A 6LR connects 6LNs to other 6LRs or 6LBR. One or more 6LBRs are connected to the Internet. A router can manage connections with a number of peripheral devices, while a peripheral is usually connected only to a central node. A single global unicast prefix is used on the whole subnet.
 The IPSP enables discovery of IP-enabled devices and the establishment of a link-layer connection for transporting IPv6 packets. The IPSP defines the node and router roles for devices that consume/originate IPv6 packets and for devices that can route IPv6 packets, respectively.
 
-### Address Configuration
+## Address Configuration
 RFC 7668 {{?RFC7668}} specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non link local address, and multiple addresses are also provided.
 
-### Header Compression
+## Header Compression
 Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression as specified in RFC 6282 {{?RFC6282}}. However, since the document focuses mainly on IPv6 over Bluetooth for non low powered devices, header compression is optional, though it is provided in the implementation.
+
+## Shortwave radio
+
+Amateur or shortwave radio is also being used as a viable alternative for long-range communication, particularly in remote or disaster-affected areas. These radios utilize radio waves that can travel over vast distances by bouncing off the ionosphere. The distance covered by these signals can vary based on the frequency used. Various frequencies are designated for emergency communication, including those used by medical relief operations, state police, fire departments, and maritime weather alerts, though these frequencies can differ from country to country.
+
+It is feasible to set up a personal computer as a shortwave radio transmitter or receiver. A possible solution involves the draft "A Method for Deriving Stable IPv6 Interface Identifiers from Amateur Radio Callsigns." by E. Pratten, which outlines a method to generate IPv6 addresses for amateur radio nodes or stations. By configuring devices with these designated IPv6 addresses to communicate over shortwave radio and leveraging local connectivity via IPv6 over Bluetooth, it is possible to extend Internet connectivity to remote areas.
 
 # Implementation of IPv6 over Bluetooth on Windows
 
