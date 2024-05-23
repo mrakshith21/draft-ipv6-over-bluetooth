@@ -67,6 +67,12 @@ Adding the IPv6 over Bluetooth functionality depends on the design and flexibili
 
 IPv6 over Bluetooth can be used as an alternate technology for connecting devices, while using the vast features of IP as well as the low powered interface of Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems, we can facilitate the use of this technology for non low powered devices and explore its potential. This section discusses some use cases.
 
+## Internet Shutdowns
+
+IPv6 over Bluetooth can be particularly useful during internet shutdowns for many reasons. They can act as an alternative communication during an internet shutdown, when traditional communication methods (such as Wi-Fi) might be disrupted. Bluetooth, which operates on short-range radio frequencies, can provide an alternative path for communication, allowing devices to connect directly with each other. Bluetooth can support mesh networking, where devices connect to form a network that can deliver messages across multiple hops. This can help in maintaining a local network of connected devices even when the internet is unavailable. By using IPv6, which allows for a large number of unique IP addresses, devices can effectively communicate within this mesh network.
+
+By making use of Bluetooth with IPv6, we can create a decentralized networks that are less reliant on centralized internet infrastructure. This can be particularly useful in cases where the internet infrastructure are frequently damaged. The reduction in the dependence on internet through the use of IPv6 over Bluetooth will reduce the losses and the problems caused by the internet shutdowns.
+
 ## Disaster recovery
 
 In a disaster area where traditional means of communication like the internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. Devices can form adhoc networks with each other using Ethernet cables or Bluetooth, but it is insufficient to connect the entire network. In such a situation, IPv6 over Bluetooth can be a potential means of forming a network of connected devices.
