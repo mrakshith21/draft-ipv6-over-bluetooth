@@ -162,7 +162,7 @@ Additionally, the following libraries will be needed to support the functionalit
 ~~~
                     +--------------+
                     |    6LoWPAN   |
-                    | library (DLL)|
+                    |    library   |
                     +--------------+
                            |
                            |
@@ -171,19 +171,20 @@ Additionally, the following libraries will be needed to support the functionalit
 | Driver interop |  |    Packet     |   | Bluetooth GATT |
 | library        |--|  processing   |---| library        |
 +----------------+  |  application  |   +----------------+
-          |         +---------------+	      |
-          +------------------+		      |
-User mode	             |		      |
------------------------------|----------------|-------------
-Kernel mode		     |		      |
-                             |		      |
- +--------------+	     |		   +--------------+
- |      UDP     |	     |		   | Bluetooth LE |
- +--------------+     +-----------------+    +--------------+
- |     IPv6     |     | Driver or kernel|	   |   Bluetooth  |
- +--------------+     |    module       |	   |     L2CAP    |
- |Wi-Fi/Ethernet|     +-----------------+	   +--------------+
+          |         +---------------+	            |
+          +------------------+		            |
+User mode	             |		            |
+-----------------------------|----------------------|-------------
+Kernel mode		     |		            |
+                             |		            |
+ +--------------+	     |		         +--------------+
+ |      UDP     |	     |		         | Bluetooth LE |
+ +--------------+     +-----------------+        +--------------+
+ |     IPv6     |     | Driver or kernel|	 |   Bluetooth  |
+ +--------------+     |    module       |	 |     L2CAP    |
+ |Wi-Fi/Ethernet|     +-----------------+	 +--------------+
  +--------------+
+
 ~~~
 {: #fig-arch title="Architecture"}
 
