@@ -1433,7 +1433,7 @@ The IPSP enables the discovery of IP-enabled devices and the establishment of a 
 <pre>
                     +--------------+
                     |    6LoWPAN   |
-                    | library (DLL)|
+                    |    library   |
                     +--------------+
                            |
                            |
@@ -1442,19 +1442,20 @@ The IPSP enables the discovery of IP-enabled devices and the establishment of a 
 | Driver interop |  |    Packet     |   | Bluetooth GATT |
 | library        |--|  processing   |---| library        |
 +----------------+  |  application  |   +----------------+
-          |         +---------------+         |
-          +------------------+                |
-User mode                    |                |
------------------------------|----------------|-------------
-Kernel mode                  |                |
-                             |                |
- +--------------+            |             +--------------+
- |      UDP     |            |             | Bluetooth LE |
- +--------------+     +-----------------+    +--------------+
- |     IPv6     |     | Driver or kernel|          |   Bluetooth  |
- +--------------+     |    module       |          |     L2CAP    |
- |Wi-Fi/Ethernet|     +-----------------+          +--------------+
+          |         +---------------+               |
+          +------------------+                      |
+User mode                    |                      |
+-----------------------------|----------------------|-------------
+Kernel mode                  |                      |
+                             |                      |
+ +--------------+            |                   +--------------+
+ |      UDP     |            |                   | Bluetooth LE |
+ +--------------+     +-----------------+        +--------------+
+ |     IPv6     |     | Driver or kernel|        |   Bluetooth  |
+ +--------------+     |    module       |        |     L2CAP    |
+ |Wi-Fi/Ethernet|     +-----------------+        +--------------+
  +--------------+
+
 </pre>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
