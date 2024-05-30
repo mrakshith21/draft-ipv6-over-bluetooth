@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>IPv6 Over Bluetooth for Non Low Powered Devices</title>
+<title>IPv6 Over Bluetooth for Power Affluent Devices</title>
 <meta content="Nalini Elkins" name="author">
 <meta content="Mohit P. Tahiliani" name="author">
 <meta content="Rakshith Mohan" name="author">
 <meta content="Shrinidhi Ballal Nidamboor" name="author">
 <meta content="Tejas Sankpal" name="author">
 <meta content="
-       IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 and RFC 9159  describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has not been fully explored. This document proposes using this technology for non-low-powered devices with optional header compression and discusses some use cases. 
+       IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 and RFC 9159  describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has yet to be fully explored. This document proposes using this technology for power affluent devices with optional header compression and discusses some use cases. 
     " name="description">
 <meta content="xml2rfc 3.21.0" name="generator">
 <meta content="ipv6" name="keyword">
 <meta content="bluetooth" name="keyword">
-<meta content="non low powered devices" name="keyword">
+<meta content="power affluent" name="keyword">
 <meta content="draft-elkins-v6ops-ipv6blt-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.21.0
@@ -1030,12 +1030,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <table class="ears">
 <thead><tr>
 <td class="left">Internet-Draft</td>
-<td class="center">IPv6 Over Bluetooth for Non Low Powered </td>
+<td class="center">IPv6 Over Bluetooth for Power Affluent D</td>
 <td class="right">May 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Elkins, et al.</td>
-<td class="center">Expires 24 November 2024</td>
+<td class="center">Expires 1 December 2024</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1048,12 +1048,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-elkins-v6ops-ipv6blt-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-05-23" class="published">23 May 2024</time>
+<time datetime="2024-05-30" class="published">30 May 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2024-11-24">24 November 2024</time></dd>
+<dd class="expires"><time datetime="2024-12-01">1 December 2024</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1079,10 +1079,10 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">IPv6 Over Bluetooth for Non Low Powered Devices</h1>
+<h1 id="title">IPv6 Over Bluetooth for Power Affluent Devices</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 and RFC 9159  describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has not been fully explored. This document proposes using this technology for non-low-powered devices with optional header compression and discusses some use cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">IPv6 over Bluetooth enables devices to communicate using the IPv6 protocol stack over Bluetooth wireless connections, expanding the range of networking options available to devices with Bluetooth capability. RFC 7668 and RFC 9159  describe IPv6 over Bluetooth for Bluetooth Low Energy devices. However, the potential of this technology has yet to be fully explored. This document proposes using this technology for power affluent devices with optional header compression and discusses some use cases.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <section class="note rfcEditorRemove" id="section-note.1">
       <h2 id="name-about-this-document">
@@ -1119,7 +1119,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 24 November 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 December 2024.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1152,98 +1152,92 @@ svg :is([fill="white"], [fill^="#fff"]) {
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
-            <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-use-cases" class="internal xref">Use cases</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-disaster-recovery" class="internal xref">Disaster recovery</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.2">
-                <p id="section-toc.1-1.2.2.2.1" class="keepWithNext"><a href="#section-2.2" class="auto internal xref">2.2</a>.  <a href="#name-chat-application" class="internal xref">Chat application</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.3">
-                <p id="section-toc.1-1.2.2.3.1"><a href="#section-2.3" class="auto internal xref">2.3</a>.  <a href="#name-iot-gateways" class="internal xref">IoT Gateways</a></p>
-</li>
-            </ul>
+            <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-terminology" class="internal xref">Terminology</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-relevant-technology" class="internal xref">Relevant Technology</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-use-cases" class="internal xref">Use cases</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
-                <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-gatt" class="internal xref">GATT</a></p>
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-disaster-recovery" class="internal xref">Disaster recovery</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
-                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-ipv6-over-bluetooth-network" class="internal xref">IPv6 over Bluetooth networks and the IPSP</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
-                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-address-configuration" class="internal xref">Address Configuration</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
-                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-header-compression" class="internal xref">Header Compression</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.5">
-                <p id="section-toc.1-1.3.2.5.1"><a href="#section-3.5" class="auto internal xref">3.5</a>.  <a href="#name-shortwave-radio" class="internal xref">Shortwave radio</a></p>
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-iot-gateways" class="internal xref">IoT Gateways</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-implementation-of-ipv6-over" class="internal xref">Implementation of IPv6 over Bluetooth on Windows</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-relevant-technology" class="internal xref">Relevant Technology</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.1">
-                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-architecture" class="internal xref">Architecture</a></p>
+                <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="auto internal xref">4.1</a>.  <a href="#name-gatt" class="internal xref">GATT</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2">
-                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-components" class="internal xref">Components</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.1">
-                    <p id="section-toc.1-1.4.2.2.2.1.1"><a href="#section-4.2.1" class="auto internal xref">4.2.1</a>.  <a href="#name-driver" class="internal xref">Driver</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.2">
-                    <p id="section-toc.1-1.4.2.2.2.2.1"><a href="#section-4.2.2" class="auto internal xref">4.2.2</a>.  <a href="#name-packet-processing-app" class="internal xref">Packet Processing App</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.3">
-                    <p id="section-toc.1-1.4.2.2.2.3.1"><a href="#section-4.2.3" class="auto internal xref">4.2.3</a>.  <a href="#name-gatt-server" class="internal xref">GATT server</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.2.2.4">
-                    <p id="section-toc.1-1.4.2.2.2.4.1"><a href="#section-4.2.4" class="auto internal xref">4.2.4</a>.  <a href="#name-drivertest" class="internal xref">DriverTest</a></p>
-</li>
-                </ul>
+                <p id="section-toc.1-1.4.2.2.1"><a href="#section-4.2" class="auto internal xref">4.2</a>.  <a href="#name-ipv6-over-bluetooth-network" class="internal xref">IPv6 over Bluetooth networks and the IPSP</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.3">
-                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-bluetooth-packet-layout" class="internal xref">Bluetooth packet layout</a></p>
+                <p id="section-toc.1-1.4.2.3.1"><a href="#section-4.3" class="auto internal xref">4.3</a>.  <a href="#name-address-configuration" class="internal xref">Address Configuration</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.4">
-                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-header-compression-2" class="internal xref">Header compression</a></p>
+                <p id="section-toc.1-1.4.2.4.1"><a href="#section-4.4" class="auto internal xref">4.4</a>.  <a href="#name-header-compression" class="internal xref">Header Compression</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.5">
-                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-comparison-with-rfc-7668" class="internal xref">Comparison with RFC 7668</a></p>
+                <p id="section-toc.1-1.4.2.5.1"><a href="#section-4.5" class="auto internal xref">4.5</a>.  <a href="#name-shortwave-radio" class="internal xref">Shortwave radio</a></p>
 </li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="auto internal xref">5</a>.  <a href="#name-implementation-consideratio" class="internal xref">Implementation Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
-            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-references" class="internal xref">References</a></p>
+            <p id="section-toc.1-1.6.1"><a href="#section-6" class="auto internal xref">6</a>.  <a href="#name-common-implementation-detai" class="internal xref">Common Implementation Details of IPv6 over Bluetooth</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#section-8.1" class="auto internal xref">8.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.1">
+                <p id="section-toc.1-1.6.2.1.1"><a href="#section-6.1" class="auto internal xref">6.1</a>.  <a href="#name-architecture" class="internal xref">Architecture</a></p>
 </li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.2">
-                <p id="section-toc.1-1.8.2.2.1"><a href="#section-8.2" class="auto internal xref">8.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2">
+                <p id="section-toc.1-1.6.2.2.1"><a href="#section-6.2" class="auto internal xref">6.2</a>.  <a href="#name-components" class="internal xref">Components</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.1">
+                    <p id="section-toc.1-1.6.2.2.2.1.1"><a href="#section-6.2.1" class="auto internal xref">6.2.1</a>.  <a href="#name-driver" class="internal xref">Driver</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.2">
+                    <p id="section-toc.1-1.6.2.2.2.2.1"><a href="#section-6.2.2" class="auto internal xref">6.2.2</a>.  <a href="#name-packet-processing-applicati" class="internal xref">Packet Processing Application</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.3">
+                    <p id="section-toc.1-1.6.2.2.2.3.1"><a href="#section-6.2.3" class="auto internal xref">6.2.3</a>.  <a href="#name-libraries" class="internal xref">Libraries</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6.2.2.2.4">
+                    <p id="section-toc.1-1.6.2.2.2.4.1"><a href="#section-6.2.4" class="auto internal xref">6.2.4</a>.  <a href="#name-bluetooth-packet-layout" class="internal xref">Bluetooth packet layout</a></p>
+</li>
+                </ul>
 </li>
             </ul>
 </li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
+            <p id="section-toc.1-1.7.1"><a href="#section-7" class="auto internal xref">7</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
+            <p id="section-toc.1-1.8.1"><a href="#section-8" class="auto internal xref">8</a>.  <a href="#name-security-considerations" class="internal xref">Security Considerations</a></p>
+</li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.9.1"><a href="#section-9" class="auto internal xref">9</a>.  <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10">
-            <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-references" class="internal xref">References</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-normative-references" class="internal xref">Normative References</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-informative-references" class="internal xref">Informative References</a></p>
+</li>
+            </ul>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.11">
+            <p id="section-toc.1-1.11.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+</li>
+          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12">
+            <p id="section-toc.1-1.12.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1254,57 +1248,61 @@ svg :is([fill="white"], [fill^="#fff"]) {
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  The IETF has developed specifications for IPv6 over BLE devices to enhance IoT capabilities, outlined in RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span>. This RFC primarily addresses star topology, while RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span> extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, IPv6 over BLE can be extended to non-low-powered platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">By adhering to the Internet Protocol Support Profile (IPSP), published by the Bluetooth SIG, devices such as personal computers and smartphones can harness IPv6 over Bluetooth, presenting an alternative connectivity solution. This integration amalgamates the benefits of the robust addressing of IPv6 and routing capabilities with Bluetooth.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. Furthermore, in the case of unconstrained devices, header compression is not necessary (but can be kept optional if the Bluetooth MTU size is small or if low-powered devices are also involved). This document discusses a few use cases of this technology in disaster recovery, near-field chat, and IoT gateways. It also presents an implementation of IPv6 over Bluetooth on Windows.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-1">Bluetooth is a low-power wireless technology designed for short-range control and monitoring applications.  The IETF has developed specifications for IPv6 over BLE devices to enhance IoT capabilities, outlined in RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span>. This RFC primarily addresses star topology, while RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span> extends IPv6 mesh networking capabilities over BLE links. Despite its focus on low-power devices, IPv6 over BLE can be extended to power affluent platforms like Windows, Linux, Android OS, and iPhone running on personal computers and mobile phones.<a href="#section-1-1" class="pilcrow">¶</a></p>
+<p id="section-1-2">By adhering to the Internet Protocol Support Profile (IPSP) published by the Bluetooth SIG, devices such as personal computers and smartphones can harness IPv6 over Bluetooth, presenting an alternative connectivity solution. This integration amalgamates the benefits of the robust addressing of IPv6 and routing capabilities with Bluetooth.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">Adding the IPv6 over Bluetooth functionality depends on the design and flexibility of the operating system. However, the adaptation layer need not be built from scratch since the Bluetooth L2CAP Protocol supports fragmentation and reassembly. This document discusses a few use cases of this technology in disaster recovery, near-field chat, and IoT gateways. It also presents an implementation of IPv6 over Bluetooth on Windows.<a href="#section-1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="terminology">
+<section id="section-2">
+      <h2 id="name-terminology">
+<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-terminology" class="section-name selfRef">Terminology</a>
+      </h2>
+<p id="section-2-1">Throughout this document, these terms have specific meanings:<a href="#section-2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2-2.1">
+          <p id="section-2-2.1.1">The term Bluetooth refers to Bluetooth Low Energy unless mentioned. However, a few devices (older versions) do not support Bluetooth Low Energy, which would mean Bluetooth Classic.<a href="#section-2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-2.2">
+          <p id="section-2-2.2.1">The term power affluent describes devices that are not resource-constrained. A few examples are smartphones, laptops, personal computers, etc.<a href="#section-2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-2-2.3">
+          <p id="section-2-2.3.1">The term node refers to a power-affluent device part of the IPv6 over Bluetooth network.<a href="#section-2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
 </section>
 </div>
 <div id="use-cases">
-<section id="section-2">
+<section id="section-3">
       <h2 id="name-use-cases">
-<a href="#section-2" class="section-number selfRef">2. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
+<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-use-cases" class="section-name selfRef">Use cases</a>
       </h2>
-<p id="section-2-1">IPv6 over Bluetooth can be used as an alternate technology for connecting devices while using the vast features of IP as well as the low-powered interface of Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems, we can facilitate the use of this technology for non-low-powered devices and explore its potential. This section discusses some use cases.<a href="#section-2-1" class="pilcrow">¶</a></p>
+<p id="section-3-1">IPv6 over Bluetooth is an alternate technology for connecting devices while using the vast features of IP as well as the low-powered interface of Bluetooth. By developing implementations of the IPv6 over Bluetooth stack on different operating systems, we can facilitate the use of this technology for power-affluent devices and explore its potential. This section discusses some use cases.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <div id="disaster-recovery">
-<section id="section-2.1">
+<section id="section-3.1">
         <h3 id="name-disaster-recovery">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-disaster-recovery" class="section-name selfRef">Disaster recovery</a>
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-disaster-recovery" class="section-name selfRef">Disaster recovery</a>
         </h3>
-<p id="section-2.1-1">In a disaster area where traditional means of communication like the Internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. This also applies to cases where the Internet is shut down. In such a situation, IPv6 over Bluetooth can potentially form a network of connected devices.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1-2">We assume that devices are Bluetooth enabled and are in Bluetooth range, to form a network of Bluetooth devices. As described in RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span> IPv6 over Bluetooth for Mesh Networks, devices can then take up the roles similar to a 6LN, or 6LR. In other words, some devices act as nodes, and some as routers as well. Note that routers forward packets only within the network. If the Internet is accessible for some of the devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but mobile phones as well, which leads to the formation of a network with more links.<a href="#section-2.1-2" class="pilcrow">¶</a></p>
-<p id="section-2.1-3">There are some things to consider.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2.1-4.1">
-            <p id="section-2.1-4.1.1">Devices must enforce IPv6 over IPv4 since the technology is only designed to transmit IPv6 packets over Bluetooth.<a href="#section-2.1-4.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-2.1-4.2">
-            <p id="section-2.1-4.2.1">Selection of devices as routers, or border routers is a key challenge. The border router must ensure that devices in its domain have unique addresses. The network also needs to have an IPv6 prefix, which is to be determined.<a href="#section-2.1-4.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="chat-application">
-<section id="section-2.2">
-        <h3 id="name-chat-application">
-<a href="#section-2.2" class="section-number selfRef">2.2. </a><a href="#name-chat-application" class="section-name selfRef">Chat application</a>
-        </h3>
-<p id="section-2.2-1">Bluetooth chat gained prominence through Bridgefy during the Hong Kong protests when the Internet was shut down. IPv6 over Bluetooth offers an enhanced alternative, allowing any network application, including chat apps, to operate similarly as on IPv6. In remote areas or emergencies where Internet access is unavailable, local networks can be established using IPv6 over Bluetooth.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">Devices need to advertise and register themselves in the network to be discovered. Sending a message to a nearby device would take a single hop. However, if a message is to be sent to a farther device, it would include multiple hops across routers. Users can participate in public and private chat. If some devices can connect to the Internet, they can act as border routers, enabling the other devices to connect to the Internet. This can be particularly useful in relaying emergency information or in crowded places with a poor Internet connection to communicate within a group.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.2-3">One of the advantages of this mechanism over plain Bluetooth is that devices acting as routers can forward packets using established routing protocols. Otherwise, the application would need to manage this, resulting in an increased burden on the application and higher delays. IPv6 over Bluetooth thus provides a more efficient and scalable solution for local communication during Internet disruptions.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-1">In a disaster area where traditional means of communication like the Internet and cables are damaged or unavailable, establishing connectivity between devices can be critical for coordination, rescue efforts, and communication with survivors. This also applies to cases where the Internet is shut down. In such a situation, IPv6 over Bluetooth can form a network of connected devices.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">We assume that devices are Bluetooth enabled and in Bluetooth range to form a network of Bluetooth devices. As described in RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span> IPv6 over Bluetooth for Mesh Networks, devices can then take up roles similar to a 6LN or 6LR. In other words, some devices act as nodes, and some as routers. Note that routers forward packets only within the network. If the Internet is accessible for some devices, they can act as 6LBR or border routers. With the IPv6 over Bluetooth layer available on the devices, applications can continue to use IP while the actual communication uses Bluetooth. This idea can be backed by the fact that Bluetooth is available not only on PCs but also on mobile phones, which leads to a network with more links.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
+<p id="section-3.1-3">There are some things to consider.
+## Chat application<a href="#section-3.1-3" class="pilcrow">¶</a></p>
+<p id="section-3.1-4">Bluetooth chat gained prominence through Bridgefy during the Hong Kong protests when the Internet was shut down. IPv6 over Bluetooth offers an enhanced alternative, allowing any network application, including chat apps, to operate similarly as on IPv6. Chat applications can be used to establish local networks via IPv6 over Bluetooth in remote areas or emergencies where Internet access is unavailable.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1-5">Devices need to advertise and register themselves in the network to be discovered. Sending a message to a nearby device would take a single hop. However, if a message is to be sent to a farther device, it would include multiple hops across routers. Users can participate in public and private chat. This can be particularly useful in relaying emergency information or in crowded places with a poor Internet connection to communicate within a group.<a href="#section-3.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iot-gateways">
-<section id="section-2.3">
+<section id="section-3.2">
         <h3 id="name-iot-gateways">
-<a href="#section-2.3" class="section-number selfRef">2.3. </a><a href="#name-iot-gateways" class="section-name selfRef">IoT Gateways</a>
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-iot-gateways" class="section-name selfRef">IoT Gateways</a>
         </h3>
-<p id="section-2.3-1">Use cases in building management, healthcare, workplaces, manufacturing, logistics, and hospitality have introduced low-power IoT devices into their environments. These devices typically do not support IP-based interfaces. Hence, gateway functions need to allow these devices to communicate with the applications that manage them. IoT gateways provide various functionalities depending on the kind of devices they are connected to and their functionality. For example, authentication and authorization of application clients that will access the device, interfaces that allow for bi-directional communication to non-IP devices, and one or more channels to process requests, responses, and asymmetric communications with the non-IP radio resources (access points) in the system, and so on. IoT networks use customized gateways that communicate with each other and external networks to fulfill the required functionality.<a href="#section-2.3-1" class="pilcrow">¶</a></p>
-<p id="section-2.3-2">IPv6 over Bluetooth can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which relay data to the central router for external connectivity.<a href="#section-2.3-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-1">Use cases in building management, healthcare, workplaces, manufacturing, logistics, and hospitality have introduced low-power IoT devices into their environments. These devices typically do not support IP-based interfaces. Hence, gateway functions need to allow these devices to communicate with the applications that manage them. IoT gateways provide various functionalities depending on the kind of devices they are connected to and their functionality. For example, authentication and authorization of application clients that will access the device, interfaces that allow for bi-directional communication to non-IP devices, and one or more channels to process requests, responses, and asymmetric communications with the non-IP radio resources (access points) in the system, and so on. IoT networks use customized gateways that communicate with each other and external networks to fulfill the required functionality.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">IPv6 over Bluetooth can be used in IoT networks wherein multiple IoT gateways communicate with each other and a central router using IPv6 over Bluetooth Low Energy (BLE). The topology consists of IoT devices connected to local gateways, which relay data to the central router for external connectivity.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <span id="name-multiple-iot-gateways-conne"></span><div id="fig-gateways">
 <figure id="figure-1">
-          <div class="alignLeft art-text artwork" id="section-2.3-3.1">
+          <div class="alignLeft art-text artwork" id="section-3.2-3.1">
 <pre>
-               Iot Gateway 1
+               IoT Gateway 1
                      |
                      |
 IoT Gateway 2 --- Border Router ------------- Internet
@@ -1322,90 +1320,116 @@ IoT Gateway 2 --- Border Router ------------- Internet
 </section>
 </div>
 <div id="relevant-technology">
-<section id="section-3">
+<section id="section-4">
       <h2 id="name-relevant-technology">
-<a href="#section-3" class="section-number selfRef">3. </a><a href="#name-relevant-technology" class="section-name selfRef">Relevant Technology</a>
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-relevant-technology" class="section-name selfRef">Relevant Technology</a>
       </h2>
 <div id="gatt">
-<section id="section-3.1">
+<section id="section-4.1">
         <h3 id="name-gatt">
-<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-gatt" class="section-name selfRef">GATT</a>
+<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-gatt" class="section-name selfRef">GATT</a>
         </h3>
-<p id="section-3.1-1">GATT (Generic ATTribute Profile) defines how two Bluetooth Low Energy devices transfer messages between each other. It uses a generic data protocol called the Attribute Protocol (ATT), which is used to store services and characteristics in a simple lookup table with 16-bit IDs (UUIDs). GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics, and Control Points. A service can have one or more characteristics, and each service distinguishes itself from other services using a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services). The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point. Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-4.1-1">GATT (Generic ATTribute Profile) defines how two Bluetooth Low Energy devices transfer messages between each other. It uses a generic data protocol called the Attribute Protocol (ATT), which is used to store services and characteristics in a simple lookup table with 16-bit IDs (UUIDs). GATT transactions in BLE are based on high-level, nested objects called Profiles, Services, Characteristics, and Control Points. A service can have one or more characteristics, and each service distinguishes itself from other services using a unique numeric ID called a UUID, which can be either 16-bit (for officially adopted BLE Services) or 128-bit (for custom services). The lowest level concept in GATT transactions is the Characteristic, which encapsulates a single data point. Each characteristic distinguishes itself via a pre-defined 16-bit or 128-bit UUID.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="ipv6-over-bluetooth-networks-and-the-ipsp">
-<section id="section-3.2">
+<section id="section-4.2">
         <h3 id="name-ipv6-over-bluetooth-network">
-<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-ipv6-over-bluetooth-network" class="section-name selfRef">IPv6 over Bluetooth networks and the IPSP</a>
+<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-ipv6-over-bluetooth-network" class="section-name selfRef">IPv6 over Bluetooth networks and the IPSP</a>
         </h3>
-<p id="section-3.2-1">As per RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span>, for IPv6 over BLE mesh networks, a multilink model is chosen. The network consists of nodes 6LN (node), 6LR (router), and 6LBR (border router). A 6LN is a peripheral node that connects to the network through a 6LR or a 6LBR. A 6LR connects 6LNs to other 6LRs or 6LBR. One or more 6LBRs are connected to the Internet. A router can manage connections with a number of peripheral devices, while a peripheral is usually connected only to a central node. A single global unicast prefix is used on the whole subnet.
-The IPSP enables the discovery of IP-enabled devices and the establishment of a link-layer connection for transporting IPv6 packets. The IPSP defines the node and router roles for devices that consume/originate IPv6 packets and for devices that can route IPv6 packets.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-4.2-1">As per RFC 9159 <span>[<a href="#RFC9159" class="cite xref">RFC9159</a>]</span>, for IPv6 over BLE mesh networks, a multilink model is chosen. The network consists of nodes 6LN (node), 6LR (router), and 6LBR (border router). A 6LN is a peripheral node that connects to the network through a 6LR or a 6LBR. A 6LR connects 6LNs to other 6LRs or 6LBR. One or more 6LBRs are connected to the Internet. A router can manage connections with several peripheral devices, while a peripheral is usually connected only to a central node. A single global unicast prefix is used on the whole subnet.
+The IPSP enables the discovery of IP-enabled devices and the establishment of a link-layer connection for transporting IPv6 packets. The IPSP defines the node and router roles for devices that consume/originate IPv6 packets and for devices that can route IPv6 packets.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="address-configuration">
-<section id="section-3.3">
+<section id="section-4.3">
         <h3 id="name-address-configuration">
-<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-address-configuration" class="section-name selfRef">Address Configuration</a>
+<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-address-configuration" class="section-name selfRef">Address Configuration</a>
         </h3>
-<p id="section-3.3-1">RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non-link local address and multiple addresses are also provided.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-4.3-1">RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> specifies a stateless address autoconfiguration scheme for all nodes in the network. An IPv6 link-local address is assigned to the Bluetooth interface based on the 48-bit Bluetooth device address. A 64-bit address is generated from the Bluetooth address, which is prepended with fe80::/64. Mechanisms for registering a non-link local address and multiple addresses are also provided.<a href="#section-4.3-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="header-compression">
-<section id="section-3.4">
+<section id="section-4.4">
         <h3 id="name-header-compression">
-<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-header-compression" class="section-name selfRef">Header Compression</a>
+<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-header-compression" class="section-name selfRef">Header Compression</a>
         </h3>
-<p id="section-3.4-1">Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression specified in RFC 6282 <span>[<a href="#RFC6282" class="cite xref">RFC6282</a>]</span>. However, since the document focuses mainly on IPv6 over Bluetooth for non-low powered devices, header compression is optional, though it is provided in the implementation.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.4-1">Since BLE communication aims to conserve power, IPv6 over BLE involves header compression to reduce the size of IPv6 packets. This compression is based on the 6LoWPAN IPv6 header compression specified in RFC 6282 <span>[<a href="#RFC6282" class="cite xref">RFC6282</a>]</span>. However, since the document focuses mainly on IPv6 over Bluetooth for power-affluent devices, header compression is optional, though it is provided in the implementation.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="shortwave-radio">
-<section id="section-3.5">
+<section id="section-4.5">
         <h3 id="name-shortwave-radio">
-<a href="#section-3.5" class="section-number selfRef">3.5. </a><a href="#name-shortwave-radio" class="section-name selfRef">Shortwave radio</a>
+<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-shortwave-radio" class="section-name selfRef">Shortwave radio</a>
         </h3>
-<p id="section-3.5-1">Amateur or shortwave radio is also being used as a viable alternative for long-range communication, particularly in remote or disaster-affected areas. These radios utilize radio waves that can travel vast distances by bouncing off the ionosphere. The distance covered by these signals can vary based on the frequency used. Various frequencies are designated for emergency communication, including those used by medical relief operations, state police, fire departments, and maritime weather alerts. However, these frequencies can differ from country to country.<a href="#section-3.5-1" class="pilcrow">¶</a></p>
-<p id="section-3.5-2">Setting up a personal computer as a shortwave radio transmitter or receiver is feasible. A possible solution involves the draft "A Method for Deriving Stable IPv6 Interface Identifiers from Amateur Radio Callsigns." by E. Pratten, which outlines a method to generate IPv6 addresses for amateur radio nodes or stations. By configuring devices with these designated IPv6 addresses to communicate over shortwave radio and leveraging local connectivity via IPv6 over Bluetooth, it is possible to extend Internet connectivity to remote areas.<a href="#section-3.5-2" class="pilcrow">¶</a></p>
+<p id="section-4.5-1">Amateur or shortwave radio is a viable alternative for long-range communication, particularly in remote or disaster-affected areas. These radios utilize radio waves that can travel vast distances by bouncing off the ionosphere. The distance covered by these signals can vary based on the frequency used. Various frequencies are designated for emergency communication, including those used by medical relief operations, state police, fire departments, and maritime weather alerts. However, these frequencies can differ from country to country.<a href="#section-4.5-1" class="pilcrow">¶</a></p>
+<p id="section-4.5-2">Setting up a personal computer as a shortwave radio transmitter or receiver is feasible. A possible solution involves the draft "A Method for Deriving Stable IPv6 Interface Identifiers from Amateur Radio Callsigns." by E. Pratten, which outlines a method to generate IPv6 addresses for amateur radio nodes or stations. By configuring devices with these designated IPv6 addresses to communicate over shortwave radio and leveraging local connectivity via IPv6 over Bluetooth, it is possible to extend Internet connectivity to remote areas.<a href="#section-4.5-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
-<div id="implementation-of-ipv6-over-bluetooth-on-windows">
-<section id="section-4">
-      <h2 id="name-implementation-of-ipv6-over">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-implementation-of-ipv6-over" class="section-name selfRef">Implementation of IPv6 over Bluetooth on Windows</a>
+<div id="implementation-considerations">
+<section id="section-5">
+      <h2 id="name-implementation-consideratio">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-implementation-consideratio" class="section-name selfRef">Implementation Considerations</a>
       </h2>
-<p id="section-4-1">In this section, we describe an implementation of IPv6 over Bluetooth on Windows.<a href="#section-4-1" class="pilcrow">¶</a></p>
+<p id="section-5-1">The following describes a list of points to consider while developing an IPv6 over Bluetooth implementation:<a href="#section-5-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-5-2.1">
+          <p id="section-5-2.1.1">Header compression can be optional and determined by the application using IPv6 over Bluetooth. Correspondingly, the application can make use of the 6LowPAN library if needed. If an Internet-based application uses IPv6 over Bluetooth for communication, header compression may be avoided.<a href="#section-5-2.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.2">
+          <p id="section-5-2.2.1">Traditionally, Bluetooth MAC addresses has been used to generate IPv6 addresses. However, this method has not been promoted recently. Thus, any relevant method can be used. The address generation is beyond the scope of this draft.<a href="#section-5-2.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.3">
+          <p id="section-5-2.3.1">Devices must enforce IPv6 over IPv4 since the technology only transmits IPv6 packets over Bluetooth.<a href="#section-5-2.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.4">
+          <p id="section-5-2.4.1">Selection of devices as routers or border routers is a crucial challenge. The border router must ensure that devices in its domain have unique addresses. The network must also have an IPv6 prefix, which is to be determined.<a href="#section-5-2.4.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-5-2.5">
+          <p id="section-5-2.5.1">Packet delivery cannot be guaranteed since devices may sometimes go out of Bluetooth range.<a href="#section-5-2.5.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+</section>
+</div>
+<div id="common-implementation-details-of-ipv6-over-bluetooth">
+<section id="section-6">
+      <h2 id="name-common-implementation-detai">
+<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-common-implementation-detai" class="section-name selfRef">Common Implementation Details of IPv6 over Bluetooth</a>
+      </h2>
+<p id="section-6-1">In this section, we describe common implementation details of IPv6 over Bluetooth.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-2"><strong>Note</strong>: Exact implementation details may vary across different operating systems. This section only describes a general architecture and its components.<a href="#section-6-2" class="pilcrow">¶</a></p>
 <div id="architecture">
-<section id="section-4.1">
+<section id="section-6.1">
         <h3 id="name-architecture">
-<a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-architecture" class="section-name selfRef">Architecture</a>
+<a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-architecture" class="section-name selfRef">Architecture</a>
         </h3>
-<p id="section-4.1-1">There are two primary components to this implementation:<a href="#section-4.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">The following components are necessary for an implementation:<a href="#section-6.1-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-2.1">
-            <p id="section-4.1-2.1.1">WFP callout driver<a href="#section-4.1-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1-2.1">
+            <p id="section-6.1-2.1.1">A driver or kernel-level module<a href="#section-6.1-2.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-2.2">
-            <p id="section-4.1-2.2.1">Packet processing app<a href="#section-4.1-2.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.1-2.2">
+            <p id="section-6.1-2.2.1">A packet processing application<a href="#section-6.1-2.2.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-3">Additionally, there are four libraries in this project to support functionality in the Packet Processing App:<a href="#section-4.1-3" class="pilcrow">¶</a></p>
+<p id="section-6.1-3">Additionally, the following libraries will be needed to support the functionality of the packet-processing app:<a href="#section-6.1-3" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4.1-4.1">
-            <p id="section-4.1-4.1.1">A custom driver interoperability library.<a href="#section-4.1-4.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-6.1-4.1">
+            <p id="section-6.1-4.1.1">A driver interoperability library<a href="#section-6.1-4.1.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-4.2">
-            <p id="section-4.1-4.2.1">A Bluetooth GATT library, which also includes device enumeration and discovery.<a href="#section-4.1-4.2.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.1-4.2">
+            <p id="section-6.1-4.2.1">A Bluetooth GATT library<a href="#section-6.1-4.2.1" class="pilcrow">¶</a></p>
 </li>
-          <li class="normal" id="section-4.1-4.3">
-            <p id="section-4.1-4.3.1">A 6LoWPAN library.<a href="#section-4.1-4.3.1" class="pilcrow">¶</a></p>
+          <li class="normal" id="section-6.1-4.3">
+            <p id="section-6.1-4.3.1">A 6LoWPAN library<a href="#section-6.1-4.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.1-5"><a href="#fig-arch" class="auto internal xref">Figure 2</a> illustrates the system architecture for this solution.<a href="#section-4.1-5" class="pilcrow">¶</a></p>
+<p id="section-6.1-5"><a href="#fig-arch" class="auto internal xref">Figure 2</a> illustrates the system architecture for this solution.<a href="#section-6.1-5" class="pilcrow">¶</a></p>
 <span id="name-architecture-2"></span><div id="fig-arch">
 <figure id="figure-2">
-          <div class="alignLeft art-text artwork" id="section-4.1-6.1">
+          <div class="alignLeft art-text artwork" id="section-6.1-6.1">
 <pre>
                     +--------------+
                     |    6LoWPAN   |
@@ -1414,11 +1438,11 @@ The IPSP enables the discovery of IP-enabled devices and the establishment of a 
                            |
                            |
                            |
-+----------------+  +--------------+  +----------------+
-| Driver interop |  |    Packet    |  | Bluetooth GATT |
-| library        |--|  processing  |--| library        |
-+----------------+  |    UWP app   |  +----------------+
-          |         +--------------+          |
++----------------+  +---------------+   +----------------+
+| Driver interop |  |    Packet     |   | Bluetooth GATT |
+| library        |--|  processing   |---| library        |
++----------------+  |  application  |   +----------------+
+          |         +---------------+         |
           +------------------+                |
 User mode                    |                |
 -----------------------------|----------------|-------------
@@ -1426,10 +1450,10 @@ Kernel mode                  |                |
                              |                |
  +--------------+            |             +--------------+
  |      UDP     |            |             | Bluetooth LE |
- +--------------+     +---------------+    +--------------+
- |     IPv6     |     |  WFP callout  |    |   Bluetooth  |
- +--------------+     |    driver     |    |     L2CAP    |
- |Wi-Fi/Ethernet|     +---------------+    +--------------+
+ +--------------+     +-----------------+    +--------------+
+ |     IPv6     |     | Driver or kernel|          |   Bluetooth  |
+ +--------------+     |    module       |          |     L2CAP    |
+ |Wi-Fi/Ethernet|     +-----------------+          +--------------+
  +--------------+
 </pre>
 </div>
@@ -1437,62 +1461,77 @@ Kernel mode                  |                |
 <a href="#name-architecture-2" class="selfRef">Architecture</a>
           </figcaption></figure>
 </div>
-<p id="section-4.1-7">The architecture consists of components operating in the user and kernel modes.<a href="#section-4.1-7" class="pilcrow">¶</a></p>
-<p id="section-4.1-8">The kernel mode involves low-level operations such as filtering packets through network interfaces and establishing Bluetooth links. The driver is a core component that filters outgoing IPv6 packets and can also filter incoming ones, forwarding them appropriately. It can also push a given IPv6 packet embedded in a Bluetooth packet into the network stack for an appropriate application to consume.<a href="#section-4.1-8" class="pilcrow">¶</a></p>
-<p id="section-4.1-9">Components operating in the user mode are as follows. The Packet Processing App, working with the driver, is an important component that bridges the transition of the packet from the IP layer to Bluetooth and vice versa. It obtains Bluetooth-based link-local addresses, scans for nearby Bluetooth devices, compresses IPv6 packet headers, and initiates the transfer of Bluetooth packets or receipts. It uses libraries, such as a 6LowPAN library for address and header compression and a driver interface library to communicate with the driver. The GATT server, initiated by the Packet Processing App, provides IPSP, supports IPv6 over Bluetooth, and operates on all nodes, allowing them to act as clients and servers as needed.<a href="#section-4.1-9" class="pilcrow">¶</a></p>
+<p id="section-6.1-7">The architecture consists of components operating in the user and kernel modes.<a href="#section-6.1-7" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="components">
-<section id="section-4.2">
+<section id="section-6.2">
         <h3 id="name-components">
-<a href="#section-4.2" class="section-number selfRef">4.2. </a><a href="#name-components" class="section-name selfRef">Components</a>
+<a href="#section-6.2" class="section-number selfRef">6.2. </a><a href="#name-components" class="section-name selfRef">Components</a>
         </h3>
-<p id="section-4.2-1">The following are the components involved in the implementation of IPv6 over Bluetooth in the Windows operating system.<a href="#section-4.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2-1">The following describes the functionalities of the components specified in the architecture in detail.<a href="#section-6.2-1" class="pilcrow">¶</a></p>
 <div id="driver">
-<section id="section-4.2.1">
+<section id="section-6.2.1">
           <h4 id="name-driver">
-<a href="#section-4.2.1" class="section-number selfRef">4.2.1. </a><a href="#name-driver" class="section-name selfRef">Driver</a>
+<a href="#section-6.2.1" class="section-number selfRef">6.2.1. </a><a href="#name-driver" class="section-name selfRef">Driver</a>
           </h4>
-<p id="section-4.2.1-1">A WFP driver (Windows Filtering Platform) in Windows is a network traffic processing component that provides a programmable interface for filtering and examining network packets at various TCP/IP protocol stack layers.
-The driver acts as a bridge between the Windows TCP/IP network stack and the Bluetooth stack. It filters outgoing IPv6 packets for the nodes running in the BLE network. These packets are then processed by the packet processing app. The driver can filter incoming IPv6 packets and inject them into the TCP/IP stack.<a href="#section-4.2.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.1-1">The driver is the component that operates in the kernel mode. The following operations are to be supported by the driver
+- Filters outgoing IPv6 packets.
+- Push a given IPv6 packet embedded in a Bluetooth packet into the network stack for an appropriate application to consume.<a href="#section-6.2.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="packet-processing-app">
-<section id="section-4.2.2">
-          <h4 id="name-packet-processing-app">
-<a href="#section-4.2.2" class="section-number selfRef">4.2.2. </a><a href="#name-packet-processing-app" class="section-name selfRef">Packet Processing App</a>
+<div id="packet-processing-application">
+<section id="section-6.2.2">
+          <h4 id="name-packet-processing-applicati">
+<a href="#section-6.2.2" class="section-number selfRef">6.2.2. </a><a href="#name-packet-processing-applicati" class="section-name selfRef">Packet Processing Application</a>
           </h4>
-<p id="section-4.2.2-1">This is a core component that is a part of the bridge and the driver. Firstly, it obtains a link-local address based on the Bluetooth address. It also scans for nearby devices and identifies compatible ones. Then, it subscribes and receives IPv6 packets from the driver. After compressing the header, the packet is transferred to nearby compatible devices. The packet processing app on the other device receives the packet. If it is for that device, it sends it to the driver for inbound injection into the TCP/IP network stack; otherwise, sends the packet to each nearby device.<a href="#section-4.2.2-1" class="pilcrow">¶</a></p>
+<p id="section-6.2.2-1">The packet processing application, working with the driver, is an essential component that bridges the transition of the packet from the IP layer to Bluetooth and vice versa. The following operations are to be supported by the packet processing application:<a href="#section-6.2.2-1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-6.2.2-2.1">
+              <p id="section-6.2.2-2.1.1">Obtain IPv6 address to be used in the IPv6 over Bluetooth network<a href="#section-6.2.2-2.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.2">
+              <p id="section-6.2.2-2.2.1">Scan for nearby Bluetooth devices<a href="#section-6.2.2-2.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.3">
+              <p id="section-6.2.2-2.3.1">Communicate with the driver to receive intercepted IPv6 packets and send them over Bluetooth. Send IPv6 packets received over Bluetooth to the driver for inbound injection. If an inbound packet is not for the device, it may be forwarded it to the router application (if running) for further transmission.<a href="#section-6.2.2-2.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.2-2.4">
+              <p id="section-6.2.2-2.4.1">Use libraries, such as a 6LowPAN library for address and header compression and a driver interface library to communicate with the driver.<a href="#section-6.2.2-2.4.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
-<div id="gatt-server">
-<section id="section-4.2.3">
-          <h4 id="name-gatt-server">
-<a href="#section-4.2.3" class="section-number selfRef">4.2.3. </a><a href="#name-gatt-server" class="section-name selfRef">GATT server</a>
+<div id="libraries">
+<section id="section-6.2.3">
+          <h4 id="name-libraries">
+<a href="#section-6.2.3" class="section-number selfRef">6.2.3. </a><a href="#name-libraries" class="section-name selfRef">Libraries</a>
           </h4>
-<p id="section-4.2.3-1">The GATT server is started by the packet processing app. It contains the Internet Protocol Support Service (IPSP), which indicates that the server supports IPv6 over Bluetooth. A node must write to the characteristics of the IPSP to send a packet.<a href="#section-4.2.3-1" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="drivertest">
-<section id="section-4.2.4">
-          <h4 id="name-drivertest">
-<a href="#section-4.2.4" class="section-number selfRef">4.2.4. </a><a href="#name-drivertest" class="section-name selfRef">DriverTest</a>
-          </h4>
-<p id="section-4.2.4-1">This is a sample application that generates UDP packets with hard-coded data. The driver will intercept these packets and send them to the Packet Processing App for further action.<a href="#section-4.2.4-1" class="pilcrow">¶</a></p>
-</section>
-</div>
+<ul class="normal">
+<li class="normal" id="section-6.2.3-1.1">
+              <p id="section-6.2.3-1.1.1">A driver interoperability library: This is an interface used by the packet processing application to communicate with the driver.<a href="#section-6.2.3-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-1.2">
+              <p id="section-6.2.3-1.2.1">A Bluetooth GATT library: The packet processing application initiates a GATT application, which acts as a server or client. It supports the Internet Protocol Support Service (IPSP). A node communicates with another node by writing an IPv6 packet to a characteristic of the IPSP in the GATT application.<a href="#section-6.2.3-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-6.2.3-1.3">
+              <p id="section-6.2.3-1.3.1">A 6LoWPAN library: This is used for header compression and decompression.<a href="#section-6.2.3-1.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
 </section>
 </div>
 <div id="bluetooth-packet-layout">
-<section id="section-4.3">
-        <h3 id="name-bluetooth-packet-layout">
-<a href="#section-4.3" class="section-number selfRef">4.3. </a><a href="#name-bluetooth-packet-layout" class="section-name selfRef">Bluetooth packet layout</a>
-        </h3>
-<p id="section-4.3-1">An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. A sample packet captured from the application is shown in <a href="#fig-packet" class="auto internal xref">Figure 3</a><a href="#section-4.3-1" class="pilcrow">¶</a></p>
+<section id="section-6.2.4">
+          <h4 id="name-bluetooth-packet-layout">
+<a href="#section-6.2.4" class="section-number selfRef">6.2.4. </a><a href="#name-bluetooth-packet-layout" class="section-name selfRef">Bluetooth packet layout</a>
+          </h4>
+<p id="section-6.2.4-1">An IPv6 over BLE packet consists of an IPv6 packet embedded in a Bluetooth packet. A sample packet captured from a Windows implementation is shown in <a href="#fig-packet" class="auto internal xref">Figure 3</a>. Only the data within the Bluetooth Attribute Protocol is shown in detail for this discussion.<a href="#section-6.2.4-1" class="pilcrow">¶</a></p>
 <span id="name-packet-layout"></span><div id="fig-packet">
 <figure id="figure-3">
-          <div class="alignLeft art-text artwork" id="section-4.3-2.1">
+            <div class="alignLeft art-text artwork" id="section-6.2.4-2.1">
 <pre>
++--------------------------------------------+
+| Bluetooth HCI                              |
 +--------------------------------------------+
 | Bluetooth L2CAP Protocol                   |
 +--------------------------------------------+
@@ -1515,86 +1554,49 @@ The driver acts as a bridge between the Windows TCP/IP network stack and the Blu
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-packet-layout" class="selfRef">Packet layout</a>
-          </figcaption></figure>
+            </figcaption></figure>
 </div>
-<p id="section-4.3-3">A custom lua dissector was designed to dissect the IPv6 packet within the Bluetooth ATT Value field. The IPv6 packet is written to a GATT characteristic with handle 0x0018. So, the custom dissector is invoked when the ATT handle value is 0x0018. The buffer is then passed to the in-built IPv6 dissector, which dissects the data in the 'Value' field.<a href="#section-4.3-3" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="header-compression-1">
-<section id="section-4.4">
-        <h3 id="name-header-compression-2">
-<a href="#section-4.4" class="section-number selfRef">4.4. </a><a href="#name-header-compression-2" class="section-name selfRef">Header compression</a>
-        </h3>
-<p id="section-4.4-1">Header compression is implemented as a library (named  6LoWPAN library), not as an operating system layer or module. The compression/decompression code was based on Contiki OS,  an open-source operating system in which 6LoWPAn is implemented as an adaptation layer in the network stack. This is not possible on Windows because it is a closed source. Therefore, the concept of an adaptation layer is spread across the driver, and this module
-Thus, the header compression code lies in the user space as a library.<a href="#section-4.4-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.4-2.1">
-            <p id="section-4.4-2.1.1">While the packet processing app receives a packet from the driver, the 6LoWPAN library is called to compress the header before sending it over Bluetooth.<a href="#section-4.4-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-4.4-2.2">
-            <p id="section-4.4-2.2.1">Similarly, when a packet is received over Bluetooth, the 6LoWPAN library is called to decompress the header.<a href="#section-4.4-2.2.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-</section>
-</div>
-<div id="comparison-with-rfc-7668">
-<section id="section-4.5">
-        <h3 id="name-comparison-with-rfc-7668">
-<a href="#section-4.5" class="section-number selfRef">4.5. </a><a href="#name-comparison-with-rfc-7668" class="section-name selfRef">Comparison with RFC 7668</a>
-        </h3>
-<p id="section-4.5-1">RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> specifies RFC 6282 <span>[<a href="#RFC6282" class="cite xref">RFC6282</a>]</span> for 6LoWPAN<a href="#section-4.5-1" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-4.5-2.1">
-            <p id="section-4.5-2.1.1">Header compression<a href="#section-4.5-2.1.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-4.5-2.2">
-            <p id="section-4.5-2.2.1">Fragmentation and reassembly<a href="#section-4.5-2.2.1" class="pilcrow">¶</a></p>
-</li>
-          <li class="normal" id="section-4.5-2.3">
-            <p id="section-4.5-2.3.1">Stateless auto configuration<a href="#section-4.5-2.3.1" class="pilcrow">¶</a></p>
-</li>
-        </ul>
-<p id="section-4.5-3">The 6LoWPAN library of the project fulfills the first and third goals, the second goal is automatically performed at the Bluetooth L2CAP layer by Windows Bluetooth.
-In particular, IPv6 header compression is implemented as per RFC 6282 <span>[<a href="#RFC6282" class="cite xref">RFC6282</a>]</span>, and IPv6 address compression is implemented as per RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span>.<a href="#section-4.5-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
 </div>
 <div id="conventions-and-definitions">
-<section id="section-5">
+<section id="section-7">
       <h2 id="name-conventions-and-definitions">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
+<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-conventions-and-definitions" class="section-name selfRef">Conventions and Definitions</a>
       </h2>
-<p id="section-5-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
+<p id="section-7-1">The key words "<span class="bcp14">MUST</span>", "<span class="bcp14">MUST NOT</span>", "<span class="bcp14">REQUIRED</span>", "<span class="bcp14">SHALL</span>", "<span class="bcp14">SHALL NOT</span>", "<span class="bcp14">SHOULD</span>", "<span class="bcp14">SHOULD NOT</span>", "<span class="bcp14">RECOMMENDED</span>", "<span class="bcp14">NOT RECOMMENDED</span>",
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
-appear in all capitals, as shown here.<a href="#section-5-1" class="pilcrow">¶</a></p>
+appear in all capitals, as shown here.<a href="#section-7-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
-<section id="section-6">
+<section id="section-8">
       <h2 id="name-security-considerations">
-<a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
+<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">The security considerations specified in RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> also apply for IPv6 over Bluetooth in non-low powered devices. RFC 7416 <span>[<a href="#RFC7416" class="cite xref">RFC7416</a>]</span> provides an overview of such threats. Particularly, the routing protocol poses opportunities for threats and attacks. Considering that devices are not resource constrained, the scale of threats can only increase.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-8-1">The security considerations specified in RFC 7668 <span>[<a href="#RFC7668" class="cite xref">RFC7668</a>]</span> also applies for IPv6 over Bluetooth in power-affluent devices. RFC 7416 <span>[<a href="#RFC7416" class="cite xref">RFC7416</a>]</span> provides an overview of such threats. Notably, the routing protocol poses opportunities for threats and attacks. Considering that devices are not resource constrained, the scale of threats can only increase.<a href="#section-8-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
-<section id="section-7">
+<section id="section-9">
       <h2 id="name-iana-considerations">
-<a href="#section-7" class="section-number selfRef">7. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
+<a href="#section-9" class="section-number selfRef">9. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-7-1">This document has no IANA actions.<a href="#section-7-1" class="pilcrow">¶</a></p>
+<p id="section-9-1">This document has no IANA actions.<a href="#section-9-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<section id="section-8">
+<section id="section-10">
       <h2 id="name-references">
-<a href="#section-8" class="section-number selfRef">8. </a><a href="#name-references" class="section-name selfRef">References</a>
+<a href="#section-10" class="section-number selfRef">10. </a><a href="#name-references" class="section-name selfRef">References</a>
       </h2>
 <div id="sec-normative-references">
-<section id="section-8.1">
+<section id="section-10.1">
         <h3 id="name-normative-references">
-<a href="#section-8.1" class="section-number selfRef">8.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC2119">[RFC2119]</dt>
@@ -1609,9 +1611,9 @@ appear in all capitals, as shown here.<a href="#section-5-1" class="pilcrow">¶<
 </section>
 </div>
 <div id="sec-informative-references">
-<section id="section-8.2">
+<section id="section-10.2">
         <h3 id="name-informative-references">
-<a href="#section-8.2" class="section-number selfRef">8.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
 <dt id="RFC6282">[RFC6282]</dt>
@@ -1639,7 +1641,7 @@ appear in all capitals, as shown here.<a href="#section-5-1" class="pilcrow">¶<
       <h2 id="name-acknowledgments">
 <a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
-<p id="appendix-A-1">The authors would like to acknowledge the developer of <a href="https://github.com/uwbiot/IPv6OverBluetoothLowEnergyMesh">IPv6OverBluetoothLowEnergyMesh</a>, for his contribution of a Windows implementation for IPv6 over Bluetooth.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
+<p id="appendix-A-1">The authors would like to acknowledge the developer of <a href="https://github.com/uwbiot/IPv6OverBluetoothLowEnergyMesh">IPv6OverBluetoothLowEnergyMesh</a>, Duncan MacMichael, for his contribution of a Windows implementation for IPv6 over Bluetooth.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="authors-addresses">
